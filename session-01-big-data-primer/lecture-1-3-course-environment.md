@@ -372,18 +372,3 @@ Turn Jupyter on in the WebUI, open `http://localhost:28888/lab` and use the pass
 
 ---
 
-<details>
-<summary><strong>Instructor notes — what changed from the original deck</strong></summary>
-
-- **Architecture and server layout** are kept exactly as in the original slides (NiFi, MinIO, HDFS, Kafka, Spark, MapReduce, MongoDB, MariaDB, Jupyter, Superset, Airflow), redrawn as diagrams and tables.
-- **OSBDET name corrected:** the README calls it the "Open Source Big Data Educational **Toolkit**" (the original slide said "Toolbet").
-- **Please check the version you distribute.** The current OSBDET release (26r1) no longer includes an Airflow module: orchestration is now handled by **Kestra**, and ClickHouse, Grafana, OpenMetadata, a truck fleet simulator and a web panel were added. If your students get the 26r1 image, you may want to replace Airflow with Kestra in the architecture slides.
-- **New slides added:** notebook anatomy, VM layering, hardware recommendations and port mapping (from the OSBDET README), enterprise equivalents, and what's new in 26r1.
-- **Browser logos:** Internet Explorer (retired in 2022) was removed; browsers are now named in text.
-- **Logos:** third-party product logos are not reproduced; tools are shown by name.
-- **Installation sections added (3 and 4)** from the Your Local Big Data Cloud slides: OSBDET 2026 architecture, laptop types and requirements, VirtualBox and UTM journeys, start/stop, troubleshooting, the WebUI, OSBDET's Jupyter and a validation checklist.
-- **Hardware:** the earlier OSBDET README figures (2 CPUs, 4 GB) were replaced by the course requirements (16 GB RAM, 50 GB free) to avoid contradictory numbers.
-- **Airflow vs Kestra:** sections 1–2 keep your original architecture with Airflow; the new section 3 shows the 26r1 architecture with Kestra, ClickHouse, Grafana and OpenMetadata, matching your installation slides.
-- **Wording:** grammar fixes ("a educational" → "an educational", "straight forward" → "straightforward", "key to address success" → "key to success").
-
-</details>
