@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Optional Lab 9.1 — MovieLens MapReduce Data Processing
+## Optional Lab 10.1 — MovieLens MapReduce Data Processing
 
 *Hadoop Streaming + Python on OSBDET 2026 · Updated October 2026*
 
@@ -19,7 +19,7 @@
 
 1. **Start the VM** — VirtualBox: *Start without GUI* · UTM: *Play*
 2. **Open the WebUI** — `http://localhost:2026`
-3. **Have lab 7.1 done** — MovieLens must already be in HDFS
+3. **Have lab 8.1 done** — MovieLens must already be in HDFS
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### The MovieLens dataset
 
-Movie ratings from [MovieLens](https://movielens.org/), maintained by [GroupLens](https://grouplens.org/datasets/movielens/). Small version: **100,836 ratings**, **3,683 tags**, **9,742 movies**, **610 users**, already ingested into HDFS in lab 7.1.
+Movie ratings from [MovieLens](https://movielens.org/), maintained by [GroupLens](https://grouplens.org/datasets/movielens/). Small version: **100,836 ratings**, **3,683 tags**, **9,742 movies**, **610 users**, already ingested into HDFS in lab 8.1.
 
 ```
 movies.csv                                    ratings.csv
@@ -46,7 +46,7 @@ We want to identify **new opportunities to increase revenue**, which needs a bet
 ### The lab's data value chain
 
 ```
-(lab 7.1)  CSV files ─► NiFi ─► HDFS /datalake/raw/movielens ◄──► Hadoop MapReduce (Hadoop Streaming + Python, YARN)
+(lab 8.1)  CSV files ─► NiFi ─► HDFS /datalake/raw/movielens ◄──► Hadoop MapReduce (Hadoop Streaming + Python, YARN)
                                 HDFS /jobs/…   ◄── results
 ```
 
@@ -92,7 +92,7 @@ $ hdfs dfs -ls /datalake/raw/movielens/movies /datalake/raw/movielens/ratings
 … 2483723 /datalake/raw/movielens/ratings/ratings.csv
 ```
 
-Missing? Run lab 7.1 again, or upload them: `hdfs dfs -put movies.csv /datalake/raw/movielens/movies/`
+Missing? Run lab 8.1 again, or upload them: `hdfs dfs -put movies.csv /datalake/raw/movielens/movies/`
 
 ---
 

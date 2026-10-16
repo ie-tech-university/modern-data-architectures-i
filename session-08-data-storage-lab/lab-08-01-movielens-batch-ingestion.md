@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lab 7.1 — MovieLens Batch Data Ingestion
+## Lab 8.1 — MovieLens Batch Data Ingestion
 
 *NiFi 2 + HDFS on OSBDET 2026 · Updated October 2026*
 

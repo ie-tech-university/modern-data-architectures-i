@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lecture 4.1 — Data Ingestion
+## Lecture 3.1 — Data Ingestion
 
 *Updated edition, October 2026*
 

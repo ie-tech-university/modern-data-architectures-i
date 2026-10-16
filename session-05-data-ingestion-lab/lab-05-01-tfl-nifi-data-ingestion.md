@@ -1,7 +1,7 @@
 # Modern Data Architectures for Big Data I
-## Lab — Transport for London Data Ingestion with Apache NiFi
+## Lab 5.1 — Transport for London Data Ingestion with Apache NiFi
 
-*Lecture 4.1 lab · Apache NiFi 2 on OSBDET 2026 · Updated October 2026*
+*Apache NiFi 2 on OSBDET 2026 · Updated October 2026*
 
 ---
 

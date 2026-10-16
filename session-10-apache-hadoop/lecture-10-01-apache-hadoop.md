@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lecture 9.2 — Apache Hadoop
+## Lecture 10.1 — Apache Hadoop
 
 *Updated edition, October 2026*
 

@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lecture 5.1 — Data Storage
+## Lecture 6.1 — Data Storage
 
 *Updated edition, October 2026*
 

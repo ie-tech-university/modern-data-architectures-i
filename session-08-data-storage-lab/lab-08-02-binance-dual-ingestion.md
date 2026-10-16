@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lab 7.2 — Binance Crypto Exchange Dual Data Ingestion
+## Lab 8.2 — Binance Crypto Exchange Dual Data Ingestion
 
 *Batch + streaming with NiFi 2, MinIO and Kafka on OSBDET 2026 · Updated October 2026*
 
@@ -101,11 +101,11 @@ The two paths from lectures 5.1 and 7.1 in one flow: the same data feeds the **d
 
 ### Introducing object stores
 
-- In lab 7.1 we used **HDFS** (a distributed file system) for batch storage
+- In lab 8.1 we used **HDFS** (a distributed file system) for batch storage
 - Now we use **MinIO**, an **S3-compatible object store**
 - Object storage is the base of **decoupled** architectures: storage on one side (MinIO), table formats in the middle (Iceberg, Hudi, Delta Lake), any compute engine on top (Spark, Trino, StarRocks, Druid)
 
-*Recall from lecture 5.1: MinIO's free community edition stopped being maintained in 2025; OSBDET ships an earlier release that works well for learning.*
+*Recall from lecture 6.1: MinIO's free community edition stopped being maintained in 2025; OSBDET ships an earlier release that works well for learning.*
 
 ### Steps 1–2 — Start MinIO and log in
 

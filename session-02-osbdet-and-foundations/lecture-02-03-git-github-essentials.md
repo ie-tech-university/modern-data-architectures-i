@@ -319,7 +319,7 @@ VS Code and GitHub offer *Accept current · Accept incoming · Accept both*. Cha
 %cd movielens-analysis
 !git status --short
 !git add lab_7_1.ipynb
-!git commit -m "Add lab 7.1 notebook"
+!git commit -m "Add lab 8.1 notebook"
 !git push
 ```
 

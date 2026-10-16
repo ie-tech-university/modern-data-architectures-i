@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Lab 7.2 — Binance Dual Data Ingestion</title>
+<title>Lab 8.2 — Binance Dual Data Ingestion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -1662,7 +1662,7 @@ pre.kafka-out { font-size: 13.5px; line-height: 21px; }
   <div class="rings" aria-hidden="true"></div>
   <p class="course">Modern Data Architectures for Big Data I · Lab</p>
   <h1>Binance Crypto Exchange<br>Dual Data Ingestion</h1>
-  <p class="sub">Lab 7.2 &nbsp;|&nbsp; Batch + streaming with NiFi 2, MinIO and Kafka</p>
+  <p class="sub">Lab 8.2 &nbsp;|&nbsp; Batch + streaming with NiFi 2, MinIO and Kafka</p>
 </section>
 
 <section class="slide" aria-label="Agenda">
@@ -1810,11 +1810,11 @@ ws.close()</pre>
   <div class="cols" style="grid-template-columns:1fr 1.15fr;align-items:center">
     <div>
       <ul class="small">
-        <li>In lab 7.1 we used <strong>HDFS</strong>, a distributed file system, for batch storage</li>
+        <li>In lab 8.1 we used <strong>HDFS</strong>, a distributed file system, for batch storage</li>
         <li>Now we use <strong>MinIO</strong>, an <strong>S3-compatible object store</strong>, for batch storage</li>
         <li>Object storage is the base of <strong>decoupled</strong> architectures: storage on one side, any compute engine on the other</li>
       </ul>
-      <p class="small muted" style="margin-top:12px">Recall from lecture 5.1: MinIO's free community edition stopped being maintained in 2025; OSBDET ships an earlier release that works well for learning.</p>
+      <p class="small muted" style="margin-top:12px">Recall from lecture 6.1: MinIO's free community edition stopped being maintained in 2025; OSBDET ships an earlier release that works well for learning.</p>
     </div>
     <div class="decoup" role="img" aria-label="Decoupled storage: compute engines such as Spark, Trino, StarRocks and Druid on top; table formats Iceberg, Hudi and Delta Lake in the middle; MinIO object storage with zones for staging, structured, raw and curated data at the bottom.">
       <div class="dc-row c"><span class="dc-l">Compute</span><i>Spark</i><i>Trino</i><i>StarRocks</i><i>Druid</i></div>
@@ -1863,7 +1863,7 @@ ws.close()</pre>
         <li><b>Name it <code>raw-binance</code></b><span>Lowercase, with the dash</span></li>
         <li><b>User → Object Browser</b><span>To watch files arrive later</span></li>
       </ol>
-      <p class="small muted" style="margin-top:10px">Or in code (lecture 5.1): <code class="ic">s3.create_bucket(Bucket="raw-binance")</code></p>
+      <p class="small muted" style="margin-top:10px">Or in code (lecture 6.1): <code class="ic">s3.create_bucket(Bucket="raw-binance")</code></p>
     </div>
   </div>
 </section>

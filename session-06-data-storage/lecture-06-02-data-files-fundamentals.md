@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lecture 5.2 — Data & Files Fundamentals
+## Lecture 6.2 — Data & Files Fundamentals
 
 *Updated edition, October 2026*
 

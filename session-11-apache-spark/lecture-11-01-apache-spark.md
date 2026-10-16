@@ -194,7 +194,7 @@ Sources ─► NiFi ─► HDFS / Kafka ─► Spark (Spark SQL · Structured St
 from pyspark.sql import SparkSession, functions as F
 spark = SparkSession.builder.appName("movielens").getOrCreate()
 
-# the files you ingested with NiFi in lab 7.1
+# the files you ingested with NiFi in lab 8.1
 movies = spark.read.csv("hdfs:///datalake/raw/movielens/movies", header=True, inferSchema=True)
 movies.printSchema()
 movies.show(3, truncate=False)

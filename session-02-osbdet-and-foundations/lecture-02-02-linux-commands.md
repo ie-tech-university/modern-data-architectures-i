@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lecture 3.1 — How to Be a Big Data Hacker: Linux Commands
+## Lecture 2.2 — How to Be a Big Data Hacker: Linux Commands
 
 *Updated edition, October 2026 · Practice notebook: `linux-in-jupyter-practice.ipynb`*
 
@@ -377,7 +377,7 @@ $ du -sh landing
 3.2M  landing
 ```
 
-That's the landing zone NiFi picks up in lab 7.1.
+That's the landing zone NiFi picks up in lab 8.1.
 
 ---
 

@@ -1890,7 +1890,7 @@ body.flow .am-band { margin: 10px 0 0; width: 100%; }
 words  = lines.select(F.explode(F.split(F.lower(<span class="ts">"value"</span>), <span class="ts">"[^a-z']+"</span>)).alias(<span class="ts">"word"</span>))
 counts = words.filter(<span class="ts">"word != ''"</span>).groupBy(<span class="ts">"word"</span>).count()
 counts.show()</pre>
-      <p class="small" style="margin-top:12px"><strong>3 lines</strong> of logic, same result as lecture 9.2: be 2 · not 2 · romeo 2 · to 3…</p>
+      <p class="small" style="margin-top:12px"><strong>3 lines</strong> of logic, same result as lecture 10.1: be 2 · not 2 · romeo 2 · to 3…</p>
     </div>
   </div>
 </section>
@@ -2187,7 +2187,7 @@ print(with_provider.filter(<span class="ts">"provider = 'yahoo.com'"</span>).cou
 <span class="tk">from</span> pyspark.sql <span class="tk">import</span> SparkSession, functions <span class="tk">as</span> F
 spark = SparkSession.builder.appName(<span class="ts">"movielens"</span>).getOrCreate()
 
-<span class="tc"># the files you ingested with NiFi in lab 7.1</span>
+<span class="tc"># the files you ingested with NiFi in lab 8.1</span>
 movies = spark.read.csv(<span class="ts">"hdfs:///datalake/raw/movielens/movies"</span>,
                         header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
 movies.printSchema()

@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Lecture 4.2 — Apache NiFi
+## Lecture 4.1 — Apache NiFi
 
 *Updated edition, October 2026 — NiFi 2*
 
