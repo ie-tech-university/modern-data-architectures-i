@@ -7,7 +7,10 @@ authors = [
     { name = "Gustavo Martin Vela", email = "gustavo.martinvela@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "ipykernel>=7.4.0",
+    "jupyter>=1.1.1",
+]
 
 [project.scripts]
 modern-data-architectures-i = "modern_data_architectures_i:main"
