@@ -229,7 +229,7 @@ ingest ─► clean ratings ┐
 |---|---|---|---|
 | [Apache Airflow](https://airflow.apache.org/) | Author, schedule and monitor workflows as Python code (Airflow 3) | Airbnb | industry standard |
 | [Dagster](https://dagster.io/) | Asset-centric orchestrator for ML, analytics and ETL | Elementl (now Dagster Labs) | growing |
-| Kestra | Declarative YAML workflows; included in OSBDET 26r1 | Kestra | growing |
+| Kestra | Declarative YAML workflows; included in OSBDET v26r1 | Kestra | growing |
 | Luigi | Python package for pipelines of batch jobs | Spotify | mature |
 | Apache Oozie | Workflow scheduler for Hadoop jobs | Yahoo! | retired (Attic) |
 | [Azkaban](https://azkaban.github.io/) | Batch workflow scheduler for Hadoop jobs | LinkedIn | legacy |

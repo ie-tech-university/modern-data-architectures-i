@@ -1,7 +1,7 @@
 # Modern Data Architectures for Big Data I
 ## Lecture 2.2 — How to Be a Big Data Hacker: Linux Commands
 
-*Updated edition, October 2026 · Practice notebook: `linux-in-jupyter-practice.ipynb`*
+*Updated edition, October 2026 · Practice notebook: `lab-02-01-linux-in-jupyter.ipynb`*
 
 ---
 
@@ -399,14 +399,3 @@ That's the landing zone NiFi picks up in lab 8.1.
 | Help | `man cmd` · `cmd --help` · `Tab` · `Ctrl+C` · `Ctrl+R` |
 
 ---
-
-<details>
-<summary><strong>Instructor notes — what changed from the original deck</strong></summary>
-
-- **Kept:** ls, mkdir, rm, cd, cp, mv, cat, head, tail, with their syntax and warnings.
-- **Corrected:** the original said `head` prints the *last* N lines; it prints the **first** N (default 10).
-- **Added:** why Linux, distributions, the layered architecture, prompt and command anatomy, help and shortcuts, the file system tree, absolute/relative paths, touch/rmdir, wildcards, wc/less/tail -f, grep/find, pipes and redirection (with a real MovieLens pipeline matching the MapReduce lab results), permissions, processes/disk/memory, environment variables, curl/wget/unzip/tar/ssh, **Linux in Jupyter** (`!`, capturing output, `{var}`, the `!cd` trap, `%cd`, `%%bash`), HDFS equivalents and a landing-zone exercise.
-- **Practice notebook** `linux-in-jupyter-practice.ipynb`: executed end to end; all outputs shown are real.
-- **Logos and the Tux mascot** are not reproduced.
-
-</details>

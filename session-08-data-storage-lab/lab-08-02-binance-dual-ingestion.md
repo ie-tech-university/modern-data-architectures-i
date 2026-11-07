@@ -1,7 +1,7 @@
 # Modern Data Architectures for Big Data I
 ## Lab 8.2 — Binance Crypto Exchange Dual Data Ingestion
 
-*Batch + streaming with NiFi 2, MinIO and Kafka on OSBDET 2026 · Updated October 2026*
+*Batch + streaming with NiFi 2, MinIO and Kafka on OSBDET v26r1 · Updated October 2026*
 
 ---
 
@@ -93,7 +93,7 @@ Binance WebSocket ──► Apache NiFi ─┬─ batch · 1 file per minute (JS
 btcusdt@miniTicker    one connection └─ streaming · every event as it arrives ──► Kafka  (topic binance.bitcoin)
 ```
 
-The two paths from lectures 5.1 and 7.1 in one flow: the same data feeds the **data lake** and the **real-time** pipeline.
+The two paths from lectures 6.1 and 7.1 in one flow: the same data feeds the **data lake** and the **real-time** pipeline.
 
 ---
 

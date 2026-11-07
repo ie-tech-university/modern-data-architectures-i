@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""reducer.py"""
+"""genres-reducer.py"""
 
 import sys
 
@@ -41,6 +41,6 @@ for line in sys.stdin:
             inprocess_genre = genre_read
             inprocess_count = count_read
 
-# Print out the last key processed
-if inprocess_genre == genre_read:
+# Print out the last key processed (skip it if this reducer got no input)
+if inprocess_genre is not None:
     print(f"{inprocess_genre}\t{inprocess_count}")

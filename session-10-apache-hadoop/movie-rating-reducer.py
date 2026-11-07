@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""reducer2.py"""
+"""movie-rating-reducer.py"""
 
 import sys
 
@@ -45,6 +45,6 @@ for line in sys.stdin:
             inprocess_total = rating_read
             inprocess_count = 1
 
-# Print out the last key processed
-if inprocess_movie == movie_read:
+# Print out the last key processed (skip it if this reducer got no input)
+if inprocess_movie is not None and inprocess_count > 0:
     print(f"{inprocess_movie}\t{inprocess_total/inprocess_count}\t{inprocess_count}")

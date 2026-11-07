@@ -224,11 +224,11 @@ The skills transfer directly, because enterprise platforms run the same technolo
 
 ---
 
-### What's new in OSBDET's 2026 release
+### What's new in OSBDET v26r1
 
-The latest OSBDET release (26r1) updates and extends the toolkit:
+The latest OSBDET release, [v26r1 (OSBDET v26r1 Release 1)](https://github.com/raulmarinperez/osbdet/releases/tag/v26r1), updates and extends the toolkit:
 
-- **Updated versions:** Kafka 4, MongoDB 8, Hadoop 3.4, NiFi 2
+- **Updated versions:** NiFi 2.7, Hadoop 3.4, Spark 3.5, Kafka 4, MongoDB 8
 - **New modules:** ClickHouse (analytical database), Grafana (monitoring dashboards), OpenMetadata (data catalog and governance), Kestra (orchestration), a truck fleet simulator (streaming data source) and a web control panel
 - **Apple Silicon support:** arm64 builds alongside amd64
 
@@ -236,7 +236,7 @@ The latest OSBDET release (26r1) updates and extends the toolkit:
 
 ## 3. Installing OSBDET
 
-### What you're installing: OSBDET 2026
+### What you're installing: OSBDET v26r1
 
 | Layer | Technologies |
 |---|---|
@@ -277,7 +277,7 @@ Laptops fall into two groups based on their processor. **Your laptop type decide
               Intel / AMD                   Apple Silicon
                    ▼                              ▼
      3.1 The VirtualBox journey          3.2 The UTM journey
-     OSBDET 2026r1 (amd64) · 9.63 GB     OSBDET'26r1.utm (arm64) · 10.77 GB
+  OSBDET'26r1(amd64).ova · 9.64 GB       OSBDET'26r1.utm.zip (arm64) · 10.64 GB
 ```
 
 ---
@@ -287,7 +287,7 @@ Laptops fall into two groups based on their processor. **Your laptop type decide
 *Only Windows laptops and older Intel MacBooks. New MacBook? Follow 3.2.*
 
 1. **Install VirtualBox** from the [official downloads page](https://www.virtualbox.org/wiki/Downloads) (tested on 7.2.4, Windows 11 and macOS).
-2. **Download the OSBDET VM**: [OSBDET 2026r1 (amd64)](https://drive.google.com/file/d/1Nx_azqUg8x_gpPfw6RAuMUlVQGOJn9OE), 9.63 GB.
+2. **Download the OSBDET VM**: [OSBDET'26r1(amd64).ova](https://drive.google.com/file/d/1Nx_azqUg8x_gpPfw6RAuMUlVQGOJn9OE), 9.64 GB.
 3. **Open VirtualBox Manager** and click **Import** (or **File → Import Appliance…**).
 4. **Find and load** the downloaded `.ova` file.
 5. Click **Finish**. The import takes a few minutes.
@@ -314,7 +314,7 @@ Laptops fall into two groups based on their processor. **Your laptop type decide
 *Only new MacBooks with Apple Silicon. Windows or Intel Mac? Follow 3.1.*
 
 1. **Install UTM 4.7.4**: [download UTM.dmg](https://github.com/utmapp/UTM/releases/download/v4.7.4/UTM.dmg) and drag UTM to Applications.
-2. **Download the OSBDET VM**: [OSBDET'26r1.utm.zip (arm64)](https://drive.google.com/file/d/1umrx-hAGLxKt-cJ3zVJTKQ41zlEomIn4/view?usp=sharing), 10.77 GB.
+2. **Download the OSBDET VM**: [OSBDET'26r1.utm.zip (arm64)](https://drive.google.com/file/d/1umrx-hAGLxKt-cJ3zVJTKQ41zlEomIn4/view?usp=sharing), 10.64 GB.
 3. **Uncompress** `OSBDET'26r1.utm.zip` to get `OSBDET'26r1.utm`.
 4. **Move** `OSBDET'26r1.utm` to its final place (e.g. Documents).
 5. In UTM: **File → Open…**, select `OSBDET'26r1.utm` and click **Open**.

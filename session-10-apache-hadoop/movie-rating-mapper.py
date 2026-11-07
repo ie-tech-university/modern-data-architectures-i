@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""mapper.py"""
+"""movie-rating-mapper.py"""
 
 import sys
 

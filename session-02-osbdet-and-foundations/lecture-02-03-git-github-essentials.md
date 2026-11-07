@@ -1,5 +1,5 @@
 # Modern Data Architectures for Big Data I
-## Git & GitHub Essentials
+## Lecture 2.3 — Git & GitHub Essentials
 
 *Clone · commit · push · branch · collaborate · October 2026*
 
@@ -357,13 +357,3 @@ VS Code and GitHub offer *Accept current · Accept incoming · Accept both*. Cha
 6. **PR**: open a pull request on GitHub, merge it, then `git switch main && git pull`
 
 ---
-
-<details>
-<summary><strong>Instructor notes</strong></summary>
-
-- **New deck**, inspired by the Git & GitHub section of the Session I concepts guide (concepts, three stages, essential commands, `.gitignore`, typical workflow) and extended with setup and authentication, clone/pull/fetch, branches with a graph, pull requests and forks, undo commands, merge conflicts and Git in notebooks.
-- **Real outputs:** every `git` output shown (init, status, commit, diff, log, graph, merge conflict, push) was produced by running the commands with Git 2.43.
-- **Updated practices:** `main` as default branch; `git switch` / `git restore` instead of `checkout`; token, SSH or `gh auth login` (GitHub stopped accepting passwords for Git operations in 2021); GitHub's 100 MB file limit.
-- **Logos** (Git, GitHub, Octocat) are not reproduced.
-
-</details>

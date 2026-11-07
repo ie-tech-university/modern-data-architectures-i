@@ -159,7 +159,7 @@ NiFi is not the only way to ingest data. Depending on the team and the scenario,
 | **Python + Apache Airflow** | Code (Python DAGs) | Scheduled or event-triggered batch ingestion, full control in code | Batch |
 | **Kafka Connect** | Configuration (JSON connectors) | Moving data in and out of Kafka | Streaming |
 | **Airbyte** | UI + ready-made connectors | Copying data from SaaS apps and databases (ELT) | Batch / CDC |
-| **Kestra** | Declarative YAML flows | Event-driven and scheduled workflows (included in OSBDET 26r1) | Batch / events |
+| **Kestra** | Declarative YAML flows | Event-driven and scheduled workflows (included in OSBDET v26r1) | Batch / events |
 | **Managed cloud services** | UI / serverless | AWS Glue, Azure Data Factory, Google Dataflow | Batch / streaming |
 
 ### Python + Airflow: ingest on a schedule or when data appears

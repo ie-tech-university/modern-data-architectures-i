@@ -1,7 +1,7 @@
 # Modern Data Architectures for Big Data I
 ## Optional Lab 10.1 — MovieLens MapReduce Data Processing
 
-*Hadoop Streaming + Python on OSBDET 2026 · Updated October 2026*
+*Hadoop Streaming + Python on OSBDET v26r1 · Updated October 2026*
 
 ---
 
@@ -325,13 +325,3 @@ $ hdfs dfs -cat /jobs/movie-rating/part-00000 | wc -l
 Two MapReduce jobs, real insights, all on Hadoop.
 
 ---
-
-<details>
-<summary><strong>Instructor notes — what changed from the original deck</strong></summary>
-
-- **Kept:** the full flow (business case, value chain, verification in HDFS, two Hadoop Streaming jobs with their design, execution, YARN and results, shutdown).
-- **Corrected:** dataset figures (100,836 ratings, 3,683 tags, 9,742 movies, 610 users); the second job is the average rating **by movie**, not by user (the key is movieId); example outputs replaced with real results (Adventure 1263, not 1219; movie 1 = 3.92 from 215 ratings, while the slide showed movie 3 with 215); deprecated `-file` replaced by `-files`; `-mapper "python3 …"` avoids depending on file permissions; the jar is referenced with a wildcard (`hadoop-streaming-*.jar`) instead of `3.4.0`; `-input` points to the folder.
-- **Added:** full, tested mapper/reducer code (handles header, CRLF and quoted commas), local pipe testing, an option table, the meaning of `_SUCCESS` and `part-00000`, text vs numeric key sorting, business insight, challenges and troubleshooting.
-- **Logos** are not reproduced.
-
-</details>

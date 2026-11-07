@@ -1,7 +1,7 @@
 # Modern Data Architectures for Big Data I
 ## Lecture 11.1 — Apache Spark
 
-*Updated edition, October 2026 · Spark 4*
+*Updated edition, October 2026 · Spark 3.5 in OSBDET; Spark 4 notes included*
 
 ---
 

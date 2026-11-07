@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""mapper.py"""
+"""genres-mapper.py"""
 
 import sys
 

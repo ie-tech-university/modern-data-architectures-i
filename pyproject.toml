@@ -1,7 +1,7 @@
 [project]
 name = "modern-data-architectures-i"
 version = "0.1.0"
-description = "Add your description here"
+description = "Course materials for Modern Data Architectures for Big Data I: ingestion, storage and processing with NiFi, Kafka, Hadoop and Spark"
 readme = "README.md"
 authors = [
     { name = "Gustavo Martin Vela", email = "gustavo.martinvela@gmail.com" }

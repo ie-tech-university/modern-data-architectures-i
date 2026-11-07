@@ -275,14 +275,3 @@ print(sorted(counts.collect(), key=lambda kv: -kv[1])[:3])
 Same questions, same answers, a fraction of the code.
 
 ---
-
-<details>
-<summary><strong>Instructor notes</strong></summary>
-
-- **New lab** derived from Optional Lab 10.1 (MapReduce). Same data, questions and data lake layout: the HDFS paths `/datalake/raw/movielens/<dataset>/` and `/jobs/<job>/` map to Unity Catalog volumes `raw` and `jobs` in schema `workspace.datalake`.
-- **Tested:** all DataFrame, SQL and RDD code was run with PySpark against the real `ml-latest-small` files; the results shown are real and match the Hadoop jobs exactly.
-- **Free Edition constraints** (from Databricks docs): serverless compute only; outbound internet restricted to trusted domains (hence the upload-first approach); no RDD API on serverless.
-- **Not tested inside Databricks:** the Databricks-specific calls (`dbutils`, `display`, `CREATE VOLUME`, `saveAsTable`) were stubbed locally. Run the notebook once in a Free Edition workspace before class.
-- If your workspace's default catalog isn't `workspace` (e.g. a university account), change `CATALOG` in the first cell.
-
-</details>

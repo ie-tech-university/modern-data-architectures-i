@@ -1,7 +1,7 @@
 # Modern Data Architectures for Big Data I
 ## Lab 5.1 — Transport for London Data Ingestion with Apache NiFi
 
-*Apache NiFi 2 on OSBDET 2026 · Updated October 2026*
+*Apache NiFi 2 on OSBDET v26r1 · Updated October 2026*
 
 ---
 
@@ -312,14 +312,3 @@ Remember to **un-terminate** the *Response* relationship once it has somewhere t
 You ingested live data from London's bike-sharing network with Apache NiFi.
 
 ---
-
-<details>
-<summary><strong>Instructor notes — what changed from the original deck</strong></summary>
-
-- **Kept:** the full lab sequence (turn on OSBDET, TfL API, lab value chain, outline, BikePoint exploration, steps 1–8, export/import, stop NiFi and OSBDET). Every screenshot is redrawn as a sketch.
-- **Corrected:** "NiFi templates are downloaded as JSON files" → NiFi 2 downloads **flow definitions**; the OSBDET welcome page screenshot said v2025r1, the deck uses 2026r1.
-- **Verified live (Oct 2026):** `/BikePoint` returns 799 stations, about 2.07 MB, cached for about 60 s; no API key needed for basic use.
-- **Added:** anatomy of a bike point and its live-status keys, endpoints table, curl/jq and Python examples, NiFi URL `localhost:29090`, the RECEIVE → DROP provenance lifecycle, FlowFile attributes written by InvokeHTTP, a flow definition excerpt, optional challenges (SplitJson, EvaluateJsonPath, PutFile/PutS3Object) and troubleshooting.
-- **Logos and photos:** TfL, NiFi and other logos plus the bike photos and movie still are not reproduced; tools are shown by name with original drawings.
-
-</details>
