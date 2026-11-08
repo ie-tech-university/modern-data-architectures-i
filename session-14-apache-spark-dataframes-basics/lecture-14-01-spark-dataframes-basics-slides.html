@@ -2195,7 +2195,7 @@ body.flow .dx-bars .r { grid-template-columns: 1fr; }
         <li><strong>13.1 (today)</strong>: create, inspect and transform DataFrames: columns, filters, sorting.</li>
         <li><strong>13.2</strong>: column functions, aggregations, joins, sets and nulls.</li>
       </ul>
-      <div class="callout" style="margin-top:18px"><strong>Our data:</strong> the MovieLens files you landed in HDFS in lab 8.1, <code class="ic">hdfs:///datalake/raw/movielens/</code>: 9,742 movies · 100,836 ratings · 3,683 tags · 610 users.</div>
+      <div class="callout" style="margin-top:18px"><strong>Our data:</strong> the MovieLens files you landed in HDFS in lab 8.1, <code class="ic">hdfs://localhost:9000/datalake/raw/movielens/</code>: 9,742 movies · 100,836 ratings · 3,683 tags · 610 users.</div>
     </div>
   </div>
 </section>
@@ -2262,7 +2262,7 @@ body.flow .dx-bars .r { grid-template-columns: 1fr; }
     <div class="dx-card main"><div class="hd">From data sources <span class="da-tag hv" style="background:var(--color-primary-seablue);color:#000066">most of the time</span></div><div class="bd">
       <p>Files, tables and databases, through <code class="ic">SparkSession.read</code>: the Data Source API.</p>
 <pre class="code k13">ratings = spark.read.csv(
-    <span class="ts">"hdfs:///datalake/raw/movielens/ratings"</span>,
+    <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>,
     header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
 
 spark.read.json(…)   spark.read.parquet(…)
@@ -2375,7 +2375,7 @@ spark.createDataFrame([(1, <span class="ts">"a"</span>, 2.5)]).printSchema()</pr
 spark = SparkSession.builder.appName(<span class="ts">"dataframes"</span>).getOrCreate()
 spark.conf.set(<span class="ts">"spark.sql.session.timeZone"</span>, <span class="ts">"UTC"</span>)
 
-base = <span class="ts">"hdfs:///datalake/raw/movielens"</span>
+base = <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens"</span>
 opts = dict(header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
 
 movies  = spark.read.csv(<span class="ts">f"{base}/movies"</span>,  **opts)

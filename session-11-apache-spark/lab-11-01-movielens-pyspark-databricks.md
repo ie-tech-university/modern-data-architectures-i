@@ -235,7 +235,7 @@ A **join** is one line in Spark; in MapReduce it needs another job or complex co
 # runs in OSBDET's Spark or a classic Databricks cluster,
 # NOT on serverless compute (no RDD API there)
 sc = spark.sparkContext
-counts = (sc.textFile("hdfs:///datalake/raw/movielens/movies")
+counts = (sc.textFile("hdfs://localhost:9000/datalake/raw/movielens/movies")
             .filter(lambda l: not l.startswith("movieId"))
             .flatMap(lambda l: l.rsplit(",", 1)[-1].split("|"))  # map
             .map(lambda g: (g, 1))                               # (genre, 1)

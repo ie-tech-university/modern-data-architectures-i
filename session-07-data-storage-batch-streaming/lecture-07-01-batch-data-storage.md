@@ -222,13 +222,16 @@ Data protected for regulatory (**GDPR**) or business reasons. Only data stewards
 #### Try it in OSBDET: one bucket per zone
 
 ```python
+%pip install boto3        # once: boto3 isn't preinstalled in OSBDET's Jupyter
 import boto3, requests, datetime
 
 s3 = boto3.client("s3", endpoint_url="http://localhost:9000",
                   aws_access_key_id="osbdet", aws_secret_access_key="osbdet123$")
 
+existing = [b["Name"] for b in s3.list_buckets()["Buckets"]]
 for zone in ["raw", "std", "gold", "work", "sensitive"]:
-    s3.create_bucket(Bucket=zone)
+    if zone not in existing:            # only once: re-running the cell is safe
+        s3.create_bucket(Bucket=zone)
 
 # land today's snapshot in raw, as-is
 now = datetime.datetime.now()

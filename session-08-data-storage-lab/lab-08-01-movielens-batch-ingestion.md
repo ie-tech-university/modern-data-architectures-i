@@ -148,11 +148,11 @@ $ find ~/notebooks/landing -type f
 ### Step 4 — What's inside the Process Group
 
 ```
-[List Files In "Landing Zone"] ─success─► [Fetch & Delete File From Landing] ─success─►
+[List Files In "Landing Zone"] ─success─► [Fetch & Delete File From "Landing Zone"] ─success─►
         ListFile                                   FetchFile
 
-[Add Dataset & Source Name] ─success─► [Put File in "Raw Zone"]
-        UpdateAttribute                        PutHDFS
+[Add Dataset & Source Name To Attributes] ─success─► [Send To DataLake (HDFS)]
+        UpdateAttribute                                      PutHDFS
 ```
 
 **Find** files → **read** them → **label** them → **store** them.
@@ -212,12 +212,12 @@ Functions chain left to right with `:`.
 
 | Property | Value |
 |---|---|
-| Hadoop Configuration Resources | `/opt/hadoop3/etc/hadoop/core-site.xml` |
+| Hadoop Configuration Resources | `/opt/hadoop3/etc/hadoop/core-site.xml,/opt/hadoop3/etc/hadoop/hdfs-site.xml` |
 | Directory | `/datalake/raw/${source}/${dataset}` → `/datalake/raw/movielens/movies` |
 | Conflict Resolution Strategy | replace |
 | Writing Strategy | Write and rename |
 
-- **core-site.xml** tells NiFi where HDFS is
+- **core-site.xml** tells NiFi where HDFS is; **hdfs-site.xml** adds the HDFS settings
 - **replace**: re-ingesting a file overwrites it
 - **Write and rename**: write to a temporary name first, so nobody reads half a file
 
@@ -253,11 +253,11 @@ The file in HDFS is 494,431 bytes, exactly the original.
 ### Bonus — query the raw zone from Jupyter
 
 ```python
-# in OSBDET's Jupyter (Spark on): top-rated movies
+# in OSBDET's Jupyter (Hadoop on): top-rated movies
 from pyspark.sql import SparkSession, functions as F
 spark = SparkSession.builder.getOrCreate()
 
-raw = "hdfs:///datalake/raw/movielens"   # default HDFS
+raw = "hdfs://localhost:9000/datalake/raw/movielens"   # OSBDET's HDFS: always write the host
 movies  = spark.read.csv(f"{raw}/movies",  header=True)
 ratings = spark.read.csv(f"{raw}/ratings", header=True, inferSchema=True)
 

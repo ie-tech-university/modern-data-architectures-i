@@ -131,7 +131,7 @@ We are going to **add the dataset we will work with**, `flights_jan08.csv`, **to
 
 ### 1.1 Start MinIO
 
-Let's **start MinIO and make it available** by turning it on from [OSBDET's WebUI](http://localhost:2026). Wait until the toggle is green.
+Let's **start MinIO and make it available** by turning it on from [OSBDET's WebUI](http://localhost:2026). Wait until the toggle is green. If it doesn't stay on, switch **Hadoop** off: both use port 9000.
 
 | Service | URL |
 |---|---|
@@ -165,7 +165,9 @@ We **upload the `flights_jan08.csv` file to MinIO manually**. Open the [MinIO Ad
 
 ### 1.3 Upload the file
 
-Once the bucket is created, it's time to **upload the file to the bucket**:
+Once the bucket is created, it's time to **upload the file to the bucket**.
+
+> **Use the Blackboard file.** The `flights_jan08.csv` in the course repository is a sample of 100,000 flights (the first rows of the file: only Southwest and ExpressJet flights), kept for quick tests. With it the code runs, but the counts and percentages won't match this guide, which uses the full file (605,765 flights).
 
 1. Download `flights_jan08.csv` from Blackboard to your computer.
 2. In the left menu, under **User**, click **Object Browser**.
@@ -723,7 +725,7 @@ delayCategorizationDF = flights_raw_df\
    .withColumn("DelaySeverity", F.when(F.col("ArrDelay")<=0,"1.nodelay")
                                  .when((F.col("ArrDelay")>0) & (F.col("ArrDelay")<=15),"2.acceptable")\
                                  .when((F.col("ArrDelay")>15) & (F.col("ArrDelay")<=30),"3.annoying")\
-                                 .when((F.col("ArrDelay")>30) & (F.col("ArrDelay")<=60),"4.impactul")\
+                                 .when((F.col("ArrDelay")>30) & (F.col("ArrDelay")<=60),"4.impactful")\
                                  .otherwise("5.unacceptable"))\
     .cache() # optimization to make the processing faster
 
@@ -747,7 +749,7 @@ delayCategorizationDF.where(F.col("Cancelled")==0)\
 | 0 | 1.nodelay | 307703 | 50.80 |
 | 1 | 2.acceptable | 136252 | 22.49 |
 | 2 | 3.annoying | 55881 | 9.22 |
-| 3 | 4.impactul | 43806 | 7.23 |
+| 3 | 4.impactful | 43806 | 7.23 |
 | 4 | 5.unacceptable | 43488 | 7.18 |
 | | **sum** | 587130 | **96.92** |
 
@@ -757,7 +759,6 @@ delayCategorizationDF.where(F.col("Cancelled")==0)\
 
 - `where(Cancelled == 0)` changes nothing: cancelled flights were already dropped by `!= "NA"`. Not wrong, just redundant.
 - `ArrDelay <= 0` compares a **string** to a number and Spark casts it silently. It works here (checked on Spark 3.5 and 4.1), but clean types make it safe by design.
-- Typo to fix: `4.impactul` → `4.impactful` (also in the pivot of Q3).
 
 #### An improved version, on clean types
 
@@ -834,7 +835,7 @@ display(severeDelaysDF.groupBy("DelaySeverity")\
 | | DelaySeverity | AverageDelay | LowestDelay | HighestDelay | StdDevDelay |
 |---|---|---|---|---|---|
 | 0 | 3.annoying | 22.04 | 16 | 30 | 4.26 |
-| 1 | 4.impactul | 42.81 | 31 | 60 | 8.50 |
+| 1 | 4.impactful | 42.81 | 31 | 60 | 8.50 |
 | 2 | 5.unacceptable | 119.01 | 61 | 1525 | 68.02 |
 
 The other five tables, side by side (AverageDelay; full stats: min is always 0):
@@ -853,19 +854,19 @@ The other five tables, side by side (AverageDelay; full stats: min is always 0):
 | Cause | DelaySeverity | AverageDelay | LowestDelay | HighestDelay | StdDevDelay |
 |---|---|---|---|---|---|
 | Carrier | 3.annoying | 5.976987 | 0 | 30 | 8.752773 |
-| Carrier | 4.impactul | 12.473314 | 0 | 60 | 17.293382 |
+| Carrier | 4.impactful | 12.473314 | 0 | 60 | 17.293382 |
 | Carrier | 5.unacceptable | 33.450952 | 0 | 1158 | 65.841617 |
 | Weather | 3.annoying | 0.516329 | 0 | 30 | 3.060524 |
-| Weather | 4.impactul | 1.549422 | 0 | 60 | 7.143866 |
+| Weather | 4.impactful | 1.549422 | 0 | 60 | 7.143866 |
 | Weather | 5.unacceptable | 7.623022 | 0 | 1049 | 34.696389 |
 | NAS | 3.annoying | 9.258317 | 0 | 30 | 9.737204 |
-| NAS | 4.impactul | 12.850660 | 0 | 60 | 16.528357 |
+| NAS | 4.impactful | 12.850660 | 0 | 60 | 16.528357 |
 | NAS | 5.unacceptable | 29.919334 | 0 | 1357 | 52.563973 |
 | Security | 3.annoying | 0.088223 | 0 | 30 | 1.232835 |
-| Security | 4.impactul | 0.110967 | 0 | 54 | 1.772146 |
+| Security | 4.impactful | 0.110967 | 0 | 54 | 1.772146 |
 | Security | 5.unacceptable | 0.062799 | 0 | 136 | 1.889815 |
 | LateAircraft | 3.annoying | 6.196221 | 0 | 30 | 9.086124 |
-| LateAircraft | 4.impactul | 15.828745 | 0 | 60 | 18.611242 |
+| LateAircraft | 4.impactful | 15.828745 | 0 | 60 | 18.611242 |
 | LateAircraft | 5.unacceptable | 47.949434 | 0 | 897 | 60.172161 |
 
 </details>
@@ -928,7 +929,7 @@ display(combinedDF.limit(20).toPandas())
 | 6 | SPI | 5.unacceptable | 40 | 150 | 26.67 |
 | 7 | CIC | 5.unacceptable | 29 | 114 | 25.44 |
 | 8 | CMI | 5.unacceptable | 59 | 243 | 24.28 |
-| 9 | ADK | **4.impactul** | 2 | 9 | 22.22 |
+| 9 | ADK | **4.impactful** | 2 | 9 | 22.22 |
 | 10 | RDD | 5.unacceptable | 33 | 152 | 21.71 |
 | 11 | GUC | 5.unacceptable | 18 | 93 | 19.35 |
 | 12 | CDV | 5.unacceptable | 12 | 62 | 19.35 |
@@ -950,14 +951,14 @@ display(combinedDF\
    .groupBy("Origin")\
    .pivot("DelaySeverity")\
    .min("SevereDelayedPercentage")\
-   .orderBy(F.col("`5.unacceptable`").desc(), F.col("`4.impactul`").desc(), F.col("`3.annoying`").desc())\
+   .orderBy(F.col("`5.unacceptable`").desc(), F.col("`4.impactful`").desc(), F.col("`3.annoying`").desc())\
    .limit(20)\
    .toPandas())
 ```
 
 `pivot` turns the three rows of each airport (one per severity) into one row with one column per severity; `min()` just picks the single value. Backticks are needed because the column names contain dots.
 
-| | Origin | 3.annoying | 4.impactul | 5.unacceptable |
+| | Origin | 3.annoying | 4.impactful | 5.unacceptable |
 |---|---|---|---|---|
 | 0 | CEC | 5.68 | 4.55 | 42.05 |
 | 1 | MQT | 7.06 | 9.41 | 28.24 |

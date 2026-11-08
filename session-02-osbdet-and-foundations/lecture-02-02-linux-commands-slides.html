@@ -2540,7 +2540,7 @@ Archive:  ml-latest-small.zip
     </div>
     <div class="nbcells">
       <div class="nbc"><span class="in">[6]:</span><code>n = !wc -l &lt; ml-latest-small/movies.csv<br>print(int(n[0]) - 1, "movies")</code></div><div class="nbo">9742 movies</div>
-      <div class="nbc"><span class="in">[7]:</span><code>!hdfs dfs -ls /datalake/raw/movielens</code></div><div class="nbo">drwxr-xr-x - osbdet hadoop 0 … /datalake/raw/movielens/links<br>drwxr-xr-x - osbdet hadoop 0 … /datalake/raw/movielens/movies …</div>
+      <div class="nbc"><span class="in">[7]:</span><code>!/opt/hadoop3/bin/hdfs dfs -ls /datalake/raw/movielens</code></div><div class="nbo">drwxr-xr-x - osbdet hadoop 0 … /datalake/raw/movielens/links<br>drwxr-xr-x - osbdet hadoop 0 … /datalake/raw/movielens/movies …</div>
     </div>
   </div>
   <p class="small muted" style="margin-top:10px"><code class="ic">var = !cmd</code> captures the output as a list of lines. <code class="ic">{var}</code> (or <code class="ic">$var</code>) inserts a Python value into the command.</p>

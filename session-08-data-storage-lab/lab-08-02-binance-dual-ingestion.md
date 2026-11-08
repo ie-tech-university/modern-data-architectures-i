@@ -19,7 +19,7 @@
 
 1. **Start the VM** — VirtualBox: *Start without GUI* · UTM: *Play*
 2. **Open the WebUI** — `http://localhost:2026`
-3. **Get the flow** — `binance_dual_ingestion.json` from Blackboard
+3. **Get the flow** — `Binance_Dual_Ingestion.json` from Blackboard
 
 ---
 
@@ -129,7 +129,7 @@ Or in code: `s3.create_bucket(Bucket="raw-binance")`
 
 1. **Start NiFi** in the WebUI
 2. **Open the NiFi UI** — `localhost:29090/nifi`
-3. **Create a Process Group** from `binance_dual_ingestion.json`; name it **Binance Dual Ingestion**
+3. **Create a Process Group** from `Binance_Dual_Ingestion.json`; name it **Binance Dual Ingestion**
 4. **Open it** — Step 1 (yellow) and Step 2 (green)
 
 ### The whole flow at a glance
@@ -202,7 +202,7 @@ When the connection opens, ConnectWebSocket emits a FlowFile on **connected**. R
 
 ### Steps 1–3 — Start Kafka, then the Process Group
 
-1. **Start Kafka** in the WebUI (NiFi and MinIO should already be on; keep Hadoop, Spark… off)
+1. **Start Kafka** in the WebUI (NiFi and MinIO should already be on; keep Hadoop off: it uses port 9000, like MinIO)
 2. **Start the Process Group** — Operation palette ▶, or right-click → Start
 3. **Go inside and watch** — counters grow every second; open queues and provenance to see FlowFiles
 
@@ -219,6 +219,7 @@ binanceupdates_202605141509.json   Today, 15:09   11.3 KiB
 Read one in Python:
 
 ```python
+%pip install boto3        # once: boto3 isn't preinstalled in OSBDET's Jupyter
 import boto3, pandas as pd, io
 s3 = boto3.client("s3", endpoint_url="http://localhost:9000",
                   aws_access_key_id="osbdet", aws_secret_access_key="osbdet123$")

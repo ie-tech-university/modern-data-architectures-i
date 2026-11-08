@@ -2235,7 +2235,7 @@ display(top_movies.limit(5))</pre>
 <pre class="code k13"><span class="tc"># runs in OSBDET's Spark or a classic Databricks cluster,</span>
 <span class="tc"># NOT on serverless compute (no RDD API there)</span>
 sc = spark.sparkContext
-counts = (sc.textFile(<span class="ts">"hdfs:///datalake/raw/movielens/movies"</span>)
+counts = (sc.textFile(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/movies"</span>)
             .filter(<span class="tk">lambda</span> l: <span class="tk">not</span> l.startswith(<span class="ts">"movieId"</span>))
             .flatMap(<span class="tk">lambda</span> l: l.rsplit(<span class="ts">","</span>, 1)[-1].split(<span class="ts">"|"</span>))  <span class="tc"># map</span>
             .map(<span class="tk">lambda</span> g: (g, 1))                               <span class="tc"># (genre, 1)</span>

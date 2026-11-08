@@ -3,7 +3,7 @@
 
 *Updated edition, November 2026. Spark 3.5 in OSBDET; Spark 4 differences noted.*
 
-All examples use the **MovieLens** files you landed in HDFS in lab 8.1 (`hdfs:///datalake/raw/movielens/`): **9,742 movies**, **100,836 ratings**, **3,683 tags**, **610 users**. Every output below is real, produced with PySpark 3.5.7 (Spark 4.1.1 where noted), with the session time zone set to UTC.
+All examples use the **MovieLens** files you landed in HDFS in lab 8.1 (`hdfs://localhost:9000/datalake/raw/movielens/`): **9,742 movies**, **100,836 ratings**, **3,683 tags**, **610 users**. Every output below is real, produced with PySpark 3.5.7 (Spark 4.1.1 where noted), with the session time zone set to UTC.
 
 ---
 
@@ -69,7 +69,7 @@ Schema = StructType([StructField('movieId', IntegerType(), True),
 | Files, tables and databases through `SparkSession.read`, the Data Source API | From Python data with `SparkSession.createDataFrame(data, schema)` |
 
 ```python
-ratings = spark.read.csv("hdfs:///datalake/raw/movielens/ratings",
+ratings = spark.read.csv("hdfs://localhost:9000/datalake/raw/movielens/ratings",
                          header=True, inferSchema=True)
 spark.read.json(…) · spark.read.parquet(…) · spark.read.table(…) · spark.read.jdbc(…)
 
@@ -141,7 +141,7 @@ import pyspark.sql.functions as F
 spark = SparkSession.builder.appName("dataframes").getOrCreate()
 spark.conf.set("spark.sql.session.timeZone", "UTC")   # outputs match the slides anywhere
 
-base = "hdfs:///datalake/raw/movielens"
+base = "hdfs://localhost:9000/datalake/raw/movielens"
 opts = dict(header=True, inferSchema=True)
 
 movies  = spark.read.csv(f"{base}/movies",  **opts)

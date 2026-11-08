@@ -1687,7 +1687,7 @@ pre.kafka-out { font-size: 13.5px; line-height: 21px; }
       <ol class="mini-steps">
         <li><b>Start the VM</b><span>VirtualBox: Start without GUI · UTM: Play</span></li>
         <li><b>Open the WebUI</b><span><code class="ic">http://localhost:2026</code></span></li>
-        <li><b>Get the flow</b><span><code class="ic">binance_dual_ingestion.json</code> from Blackboard</span></li>
+        <li><b>Get the flow</b><span><code class="ic">Binance_Dual_Ingestion.json</code> from Blackboard</span></li>
       </ol>
     </div>
   </div>
@@ -1882,12 +1882,12 @@ ws.close()</pre>
     <ol class="mini-steps">
       <li><b>Start NiFi</b><span>WebUI switch; it can take a few minutes</span></li>
       <li><b>Open the NiFi UI</b><span><code class="ic">localhost:29090/nifi</code></span></li>
-      <li><b>Create a Process Group from the file</b><span><code class="ic">binance_dual_ingestion.json</code>; name it <strong>Binance Dual Ingestion</strong></span></li>
+      <li><b>Create a Process Group from the file</b><span><code class="ic">Binance_Dual_Ingestion.json</code>; name it <strong>Binance Dual Ingestion</strong></span></li>
       <li><b>Open it and look around</b><span>You'll see Step 1 (yellow) and Step 2 (green)</span></li>
     </ol>
     <div class="win dlg" role="img" aria-label="Create Process Group dialog with the name Binance Dual Ingestion and the flow definition file selected.">
       <div class="win-bar"><i></i><i></i><i></i><span>Create Process Group</span></div>
-      <div class="dlg-body"><label class="fld">Name*<span class="input">Binance Dual Ingestion<i class="up">⤒</i></span></label><label class="fld">File to upload<span class="input hi">binance_dual_ingestion.json</span></label><div class="dlg-btns"><span>Cancel</span><span class="hi">Add</span></div></div>
+      <div class="dlg-body"><label class="fld">Name*<span class="input">Binance Dual Ingestion<i class="up">⤒</i></span></label><label class="fld">File to upload<span class="input hi">Binance_Dual_Ingestion.json</span></label><div class="dlg-btns"><span>Cancel</span><span class="hi">Add</span></div></div>
     </div>
   </div>
 </section>
@@ -2025,7 +2025,7 @@ ws.close()</pre>
     </ol>
     <div class="check" style="grid-template-columns:1fr">
       <div class="ck"><b>Running right now</b><p>NiFi · MinIO · Kafka (+ Jupyter for the terminal)</p></div>
-      <div class="ck" style="border-left-color:#D9534F"><b>Keep off</b><p>Hadoop, Spark… the laptop has limited memory</p></div>
+      <div class="ck" style="border-left-color:#D9534F"><b>Keep off</b><p>Hadoop: it uses port 9000, like MinIO. And the rest: the laptop has limited memory</p></div>
     </div>
   </div>
 </section>
@@ -2047,7 +2047,8 @@ ws.close()</pre>
     <div>
       <p class="small">Open <strong>Object Browser → raw-binance</strong> and refresh: one new file per minute, the <strong>bin size</strong> we set in MergeContent.</p>
       <p class="small" style="margin-top:12px">Read one in Python (JSON Lines → table):</p>
-<pre class="code" style="margin-top:8px"><span class="tk">import</span> boto3, pandas <span class="tk">as</span> pd, io
+<pre class="code" style="margin-top:8px">%pip install boto3   <span class="tc"># once: not preinstalled in OSBDET's Jupyter</span>
+<span class="tk">import</span> boto3, pandas <span class="tk">as</span> pd, io
 s3 = boto3.client(<span class="ts">"s3"</span>, endpoint_url=<span class="ts">"http://localhost:9000"</span>,
   aws_access_key_id=<span class="ts">"osbdet"</span>, aws_secret_access_key=<span class="ts">"osbdet123$"</span>)
 key = s3.list_objects_v2(Bucket=<span class="ts">"raw-binance"</span>)[<span class="ts">"Contents"</span>][-1][<span class="ts">"Key"</span>]

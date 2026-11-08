@@ -158,8 +158,10 @@ Adventure 1 · Animation 1 · Children 1 · Comedy 1 · Fantasy 1
 
 # the whole job, locally
 $ hdfs dfs -cat /datalake/raw/movielens/movies/movies.csv \
-    | python3 genres-mapper.py | sort | python3 genres-reducer.py
+    | python3 genres-mapper.py | LC_ALL=C sort | python3 genres-reducer.py
 ```
+
+> **Why `LC_ALL=C`?** Hadoop sorts keys byte by byte. The VM's `sort` follows its language settings (`en_US.UTF-8`) and ignores the tab, so it splits numeric keys: without `LC_ALL=C`, the ratings job of section 4 gives 12,202 lines instead of 9,724. `LC_ALL=C sort` sorts exactly like Hadoop.
 
 ### Step 2 — Run it on Hadoop
 
@@ -260,7 +262,7 @@ The reducer keeps a running **sum** and **count**, never the whole list, so memo
 ```bash
 # local test first
 hdfs dfs -cat /datalake/raw/movielens/ratings/ratings.csv \
-  | python3 movie-rating-mapper.py | sort | python3 movie-rating-reducer.py | head -3
+  | python3 movie-rating-mapper.py | LC_ALL=C sort | python3 movie-rating-reducer.py 2>/dev/null | head -3
 
 # then on Hadoop
 hadoop jar /opt/hadoop3/share/hadoop/tools/lib/hadoop-streaming-*.jar \
@@ -303,7 +305,7 @@ $ hdfs dfs -cat /jobs/movie-rating/part-00000 | wc -l
 
 ### Challenges
 
-- **A · Average rating by user:** emit `userId` as the key. Who is the toughest critic? (user 3 averages 2.44)
+- **A · Average rating by user:** emit `userId` as the key. Who is the toughest critic? (To check your job: user 3 averages 2.44.)
 - **B · Ratings by year:** convert `timestamp` to a year in the mapper and count ratings per year
 - **C · Same lab, in Spark:** see the **Databricks version** of this lab
 

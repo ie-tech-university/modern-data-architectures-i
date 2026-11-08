@@ -3,7 +3,7 @@
 
 *Updated edition, November 2026. Spark 3.5 in OSBDET; Spark 4 differences noted.*
 
-Same setup as 14.1: `movies`, `ratings`, `tags` (and `links`) read from `hdfs:///datalake/raw/movielens/`, `import pyspark.sql.functions as F`, session time zone UTC. Every output below is real (PySpark 3.5.7; UDF timings on Spark 4.1.1).
+Same setup as 14.1: `movies`, `ratings`, `tags` (and `links`) read from `hdfs://localhost:9000/datalake/raw/movielens/`, `import pyspark.sql.functions as F`, session time zone UTC. Every output below is real (PySpark 3.5.7; UDF timings on Spark 4.1.1).
 
 ---
 
@@ -142,7 +142,8 @@ String manipulation appears in almost every analysis: log files (regular express
 **Case and concatenation:**
 
 ```python
-tags.select("tag", F.initcap("tag"), F.lower("tag"), F.upper("tag")).show(5)
+tags.select("tag", F.initcap("tag").alias("initcap"), F.lower("tag").alias("lower"),
+            F.upper("tag").alias("upper")).show(5)
 ```
 ```
 +---------------+---------------+---------------+---------------+
@@ -316,7 +317,8 @@ def fix_title(title):
 fix_title_udf = F.udf(fix_title, StringType())                 # DataFrames
 spark.udf.register("fix_title", fix_title, StringType())       # SQL: SELECT fix_title(title) FROM movies
 
-movies.select("title", fix_title_udf("title").alias("fixed"))
+movies.select("title", fix_title_udf("title").alias("fixed")) \
+      .where("title != fixed").show(4, truncate=False)
 ```
 ```
 |American President, The (1995)    |The American President (1995)    |
@@ -325,7 +327,9 @@ movies.select("title", fix_title_udf("title").alias("fixed"))
 |Indian in the Cupboard, The (1995)|The Indian in the Cupboard (1995)|
 ```
 
-1,543 titles are fixed.
+1,554 titles change: 1,543 get their article moved to the front and 11 only lose trailing spaces.
+
+> **Harmless noise in OSBDET:** a Python UDF followed by `show()` or `limit()` may print `Exception ignored … BrokenPipeError` from `pyspark/daemon.py`. Spark stopped reading as soon as it had the rows it needed, and the Python worker found the pipe closed (Spark 3.5 with Python 3.13). The result is correct: ignore it.
 
 **How a Python UDF runs.** Spark serialises the function on the driver and sends it to all executors, then:
 
@@ -385,7 +389,7 @@ Grouping is a wide transformation: rows with the same key must meet in one parti
 ratings.select(
     F.count("*").alias("rows"), F.countDistinct("userId").alias("users"),
     F.approx_count_distinct("movieId").alias("movies_approx"), F.countDistinct("movieId").alias("movies_exact"),
-    F.min("rating"), F.max("rating"), F.round(F.avg("rating"), 3).alias("avg"),
+    F.min("rating").alias("min"), F.max("rating").alias("max"), F.round(F.avg("rating"), 3).alias("avg"),
     F.round(F.stddev("rating"), 3).alias("stddev"), F.round(F.variance("rating"), 3).alias("var"),
     F.sum("rating").alias("sum")).show()
 ```

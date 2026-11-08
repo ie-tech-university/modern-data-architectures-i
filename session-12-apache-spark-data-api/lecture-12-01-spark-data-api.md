@@ -3,7 +3,7 @@
 
 *Updated edition, November 2026. Spark 3.5 in OSBDET; Spark 4 notes included.*
 
-All examples use the **MovieLens** files you ingested into HDFS in lab 8.1 (`hdfs:///datalake/raw/movielens/{movies,ratings}`): **100,836 ratings**, **9,742 movies**, **610 users**. Every output shown below is real: it was produced by running the code on that data with PySpark 3.5.7 (and 4.1.1 for the Spark 4 section).
+All examples use the **MovieLens** files you ingested into HDFS in lab 8.1 (`hdfs://localhost:9000/datalake/raw/movielens/{movies,ratings}`): **100,836 ratings**, **9,742 movies**, **610 users**. Every output shown below is real: it was produced by running the code on that data with PySpark 3.5.7 (and 4.1.1 for the Spark 4 section).
 
 ---
 
@@ -122,7 +122,7 @@ ratings (DataFrame, 100,836 rows) → repartition(4)
 - **Parallelism**: the balance between the **number of partitions** and the **number of cores** (executors × cores per executor).
 
 ```python
-ratings = spark.read.csv("hdfs:///datalake/raw/movielens/ratings",
+ratings = spark.read.csv("hdfs://localhost:9000/datalake/raw/movielens/ratings",
                          header=True, inferSchema=True)
 
 ratings.rdd.getNumPartitions()        # 1 (one 2.4 MB file)
@@ -238,7 +238,7 @@ ratings.csv ─read─► DataFrame ─groupBy─► GroupedData ─agg(avg)─�
 ```python
 from pyspark.sql import functions as F
 
-base    = "hdfs:///datalake/raw/movielens"
+base    = "hdfs://localhost:9000/datalake/raw/movielens"
 opts    = dict(header=True, inferSchema=True)
 ratings = spark.read.csv(f"{base}/ratings", **opts)
 movies  = spark.read.csv(f"{base}/movies", **opts)
@@ -354,7 +354,7 @@ RDDs provide **transformations**, lazily evaluated when **actions** are performe
 
 ```python
 sc = spark.sparkContext
-lines = sc.textFile("hdfs:///datalake/raw/movielens/movies")
+lines = sc.textFile("hdfs://localhost:9000/datalake/raw/movielens/movies")
 
 lines.take(3)
 # ['movieId,title,genres',
@@ -459,7 +459,7 @@ def parse_title(line):
 titles = dict(rows.map(parse_title).collect())   # 9,742 entries: small
 bt = sc.broadcast(titles)
 
-ratings_rdd = (sc.textFile("hdfs:///datalake/raw/movielens/ratings")
+ratings_rdd = (sc.textFile("hdfs://localhost:9000/datalake/raw/movielens/ratings")
                  .filter(lambda l: not l.startswith("userId"))
                  .map(lambda l: l.split(",")))
 
@@ -567,9 +567,11 @@ sdf = spark.createDataFrame(pdf)
 
 # pandas syntax, Spark engine (pandas API on Spark, since Spark 3.2)
 import pyspark.pandas as ps
-psdf = ps.read_csv("hdfs:///datalake/raw/movielens/ratings")
+psdf = ps.read_csv("hdfs://localhost:9000/datalake/raw/movielens/ratings")
 psdf["rating"].mean()      # 3.501556983616962
 ```
+
+> ⚠ **In OSBDET the pandas API on Spark fails:** with Spark 3.5.7 and NumPy 2, `import pyspark.pandas` raises ``AttributeError: `np.NaN` was removed in the NumPy 2.0 release``. It works on Spark 4; the rest of the cell works in OSBDET.
 
 | pandas | Spark DataFrame |
 |---|---|
@@ -589,7 +591,7 @@ DataFrames can be created by hand, but the most common way is the **Data Source 
 movies = (spark.read
           .option("header", "true")
           .option("inferSchema", "true")
-          .csv("hdfs:///datalake/raw/movielens/movies"))
+          .csv("hdfs://localhost:9000/datalake/raw/movielens/movies"))
 movies.show(3, truncate=False)
 
 # other formats, same API
@@ -679,7 +681,7 @@ row.title          # 'Toy Story (1995)'
 row["genres"]      # access by name or position
 
 (top.write.mode("overwrite")
-    .parquet("hdfs:///datalake/curated/top_movies"))
+    .parquet("hdfs://localhost:9000/datalake/curated/top_movies"))
 # _SUCCESS  part-00000-….snappy.parquet
 ```
 

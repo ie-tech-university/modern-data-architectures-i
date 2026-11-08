@@ -205,6 +205,8 @@ Most tools have a web UI that you open from your browser. The OSBDET documentati
 
 > Your VM may be configured differently. Follow the setup instructions on Blackboard if they differ.
 
+> ⚠ **Port 9000:** Hadoop (HDFS) and MinIO both use it inside the VM, so only one of them can be on at a time. If MinIO's switch doesn't stay on, switch Hadoop off first (and the other way round).
+
 ---
 
 ### From the course environment to the enterprise
@@ -349,13 +351,13 @@ OSBDET includes **its own Jupyter**, with access to the big data technologies. I
 | `http://localhost:8888` | Your own Jupyter, installed on your laptop | ✗ Not for this course |
 | **`http://localhost:28888/lab`** | **OSBDET's Jupyter**, inside the VM (port 8888), with Spark, Kafka, HDFS… | ✓ Use this one |
 
-Turn Jupyter on in the WebUI, open `http://localhost:28888/lab` and use the password **`osbdet123$`**.
+Jupyter is always on (its tile in the WebUI has no switch): open `http://localhost:28888/lab` and use the password **`osbdet123$`**.
 
 ### Validate your installation
 
 1. **Start the VM** — VirtualBox: *Start without GUI* · UTM: *Play*
 2. **Open the WebUI** — `localhost:2026` shows the welcome page
-3. **Turn Jupyter on** — flip its switch in the WebUI
+3. **Jupyter is already on** — its tile in the WebUI has no switch
 4. **Log in to Jupyter** — `localhost:28888/lab` with `osbdet123$`
 5. **Run a cell** — create a notebook and run `print("Hello, OSBDET")`
 6. **Shut down properly** — VirtualBox: *Shut Down* · UTM: WebUI power button

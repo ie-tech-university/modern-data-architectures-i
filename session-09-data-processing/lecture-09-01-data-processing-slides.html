@@ -2086,11 +2086,11 @@ STORE counts INTO '/datalake/std/movielens/good_ratings';</pre>
     </div>
     <div>
       <h3>PySpark <span class="hl2">· today</span></h3>
-<pre class="code k13">(spark.read.csv(<span class="ts">"/datalake/raw/movielens/ratings"</span>,
+<pre class="code k13">(spark.read.csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>,
                 header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
       .filter(<span class="ts">"rating &gt;= 4.0"</span>)
       .groupBy(<span class="ts">"movieId"</span>).count()
-      .write.parquet(<span class="ts">"/datalake/std/movielens/good_ratings"</span>))</pre>
+      .write.parquet(<span class="ts">"hdfs://localhost:9000/datalake/std/movielens/good_ratings"</span>))</pre>
       <p class="small muted" style="margin-top:8px">Same idea, faster engine, any language, Parquet output.</p>
     </div>
   </div>
@@ -2183,7 +2183,8 @@ LIMIT  3;
         <li>For storing and querying graphs interactively: graph databases such as <strong>Neo4j</strong> (serving layer)</li>
       </ul>
     </div>
-<pre class="code k13"><span class="tk">from</span> graphframes <span class="tk">import</span> GraphFrame
+<pre class="code k13"><span class="tc"># illustrative: GraphFrames isn't installed in OSBDET</span>
+<span class="tk">from</span> graphframes <span class="tk">import</span> GraphFrame
 v = spark.createDataFrame([(<span class="ts">"a"</span>,<span class="ts">"Ana"</span>),(<span class="ts">"b"</span>,<span class="ts">"Ben"</span>),(<span class="ts">"c"</span>,<span class="ts">"Carla"</span>)], [<span class="ts">"id"</span>,<span class="ts">"name"</span>])
 e = spark.createDataFrame([(<span class="ts">"a"</span>,<span class="ts">"b"</span>),(<span class="ts">"a"</span>,<span class="ts">"c"</span>),(<span class="ts">"b"</span>,<span class="ts">"c"</span>)], [<span class="ts">"src"</span>,<span class="ts">"dst"</span>])
 g = GraphFrame(v, e)
@@ -2215,7 +2216,7 @@ g.pageRank(resetProbability=0.15, maxIter=10) \
     </div>
 <pre class="code k13"><span class="tc"># predict a movie rating from user and movie (MovieLens) with ALS</span>
 <span class="tk">from</span> pyspark.ml.recommendation <span class="tk">import</span> ALS
-ratings = spark.read.csv(<span class="ts">"/datalake/raw/movielens/ratings"</span>,
+ratings = spark.read.csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>,
                          header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
 train, test = ratings.randomSplit([0.8, 0.2], seed=42)
 

@@ -49,6 +49,8 @@ Optional, extra credit: a streaming path NiFi → Kafka (lab 8.2) · MinIO as an
 | **Processing** | **PySpark** in **Jupyter**: DataFrame API **and** Spark SQL | window functions, joins with enrichment data, Structured Streaming | pandas on the full dataset |
 | **Visualisation** | charts from **aggregated** Spark results | pandas, Matplotlib, Plotly, Superset, Grafana | screenshots of raw tables as "results" |
 
+> ⚠ **HDFS and MinIO share port 9000 in OSBDET**, so they can't run at the same time. HDFS is the required store; if you add MinIO as an extra one, plan your pipeline in steps (one of them on at a time).
+
 Everything runs in **OSBDET**, the course environment: NiFi, HDFS, Spark, Jupyter, Kafka and MinIO are already installed. pandas is welcome at the end of the pipeline: aggregate in Spark, then `.toPandas()` the small result to plot it.
 
 ---
@@ -230,7 +232,7 @@ This follows the pattern from the course: `/<layer>/<source>/<dataset>/…`
 ### 3.3 Notebook ①: data engineering (raw → curated)
 
 ```python
-raw = spark.read.json("hdfs:///datalake/raw/tfl/bikepoint/*/*/*/*.json")\
+raw = spark.read.json("hdfs://localhost:9000/datalake/raw/tfl/bikepoint/*/*/*/*.json")\
            .withColumn("file", F.col("_metadata.file_path"))
 
 status = (raw
@@ -244,7 +246,7 @@ status = (raw
   .dropDuplicates(["id", "ts"]))                                           # ④ dedupe
 
 (status.repartition("dt").write.mode("overwrite")                          # ⑤ Parquet
-       .partitionBy("dt").parquet("hdfs:///datalake/curated/tfl/bikepoint_status"))
+       .partitionBy("dt").parquet("hdfs://localhost:9000/datalake/curated/tfl/bikepoint_status"))
 ```
 
 1. **Flatten** nested JSON with `explode` (labs 16.1, 18.1).
@@ -267,7 +269,7 @@ Follow the EDA of lab 17.1:
 5. **Save** the answers to `analytics/`.
 
 ```python
-status = spark.read.parquet("hdfs:///datalake/curated/tfl/bikepoint_status")
+status = spark.read.parquet("hdfs://localhost:9000/datalake/curated/tfl/bikepoint_status")
 status.createOrReplaceTempView("status")
 
 empty_by_hour = spark.sql("""

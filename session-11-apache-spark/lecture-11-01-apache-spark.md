@@ -190,12 +190,12 @@ Sources ─► NiFi ─► HDFS / Kafka ─► Spark (Spark SQL · Structured St
 ### Your first Spark notebook in OSBDET
 
 ```python
-# Turn Hadoop and Spark on in localhost:2026, then in Jupyter:
+# Turn Hadoop on in localhost:2026 (Spark has no switch: it runs inside the notebook):
 from pyspark.sql import SparkSession, functions as F
 spark = SparkSession.builder.appName("movielens").getOrCreate()
 
 # the files you ingested with NiFi in lab 8.1
-movies = spark.read.csv("hdfs:///datalake/raw/movielens/movies", header=True, inferSchema=True)
+movies = spark.read.csv("hdfs://localhost:9000/datalake/raw/movielens/movies", header=True, inferSchema=True)
 movies.printSchema()
 movies.show(3, truncate=False)
 
@@ -209,6 +209,8 @@ movies.show(3, truncate=False)
 ```
 Drama 4361 · Comedy 3756 · Thriller 1894 · Action 1828 · Romance 1596
 ```
+
+> ⚠ **Write the host in HDFS paths:** `hdfs://localhost:9000/…`. OSBDET's Jupyter doesn't load Hadoop's configuration, so `hdfs:///…` fails with *Incomplete HDFS URI, no host*, and a path without `hdfs://` (`/datalake/…`) points to the VM's local disk.
 
 While it runs, open the **Spark UI** at `localhost:24040`. OSBDET ships Spark 3.5; everything here also works on Spark 4.
 

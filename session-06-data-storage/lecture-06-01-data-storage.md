@@ -251,6 +251,7 @@ Browse the same files in the **HDFS UI** at `localhost:50070` → *Utilities →
 ### MinIO with Python (the S3 API)
 
 ```python
+%pip install boto3        # once: boto3 isn't preinstalled in OSBDET's Jupyter
 import boto3, requests
 
 s3 = boto3.client(
@@ -260,7 +261,8 @@ s3 = boto3.client(
     aws_secret_access_key="osbdet123$",
 )
 
-s3.create_bucket(Bucket="datalake")
+if "datalake" not in [b["Name"] for b in s3.list_buckets()["Buckets"]]:
+    s3.create_bucket(Bucket="datalake")      # only once: re-running the cell is safe
 
 data = requests.get("https://api.tfl.gov.uk/BikePoint").content
 s3.put_object(Bucket="datalake", Key="raw/tfl/bikepoint.json", Body=data)

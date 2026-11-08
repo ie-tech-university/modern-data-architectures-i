@@ -1281,6 +1281,7 @@ curl -s https://api.tfl.gov.uk/BikePoint | jq <span class="ts">'length'</span>
 <span class="tc"># name and bikes available at the first 3 stations</span>
 curl -s https://api.tfl.gov.uk/BikePoint | jq <span class="ts">'.[:3][] | {name: .commonName,</span>
 <span class="ts">   bikes: (.additionalProperties[] | select(.key=="NbBikes") | .value)}'</span></pre>
+  <p class="small muted" style="margin-top:8px"><code class="ic">jq</code> isn't installed in OSBDET: <code class="ic">sudo apt install -y jq</code>, or use the Python version on the next slide.</p>
 </section>
 
 <section class="slide" data-sec="Exploring bike points">
@@ -1463,9 +1464,9 @@ top = sorted(stations, key=<span class="tk">lambda</span> s: prop(s, <span class
       <div class="attr-list">
         <div><span>filename</span><b>75b67c63-b1f3-…</b></div>
         <div><span>uuid</span><b>75b67c63-b1f3-…</b></div>
-        <div><span>mime.type</span><b>application/json</b></div>
+        <div><span>mime.type</span><b>application/json; charset=utf-8</b></div>
         <div class="hi"><span>invokehttp.status.code</span><b>200</b></div>
-        <div><span>invokehttp.status.message</span><b>OK</b></div>
+        <div><span>invokehttp.status.message</span><b>(empty)</b></div>
         <div><span>invokehttp.request.url</span><b>https://api.tfl.gov.uk/BikePoint</b></div>
       </div>
     </div>

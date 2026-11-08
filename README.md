@@ -25,7 +25,7 @@ All labs run on **[OSBDET v26r1](https://github.com/raulmarinperez/osbdet/releas
 | 13 | Apache Spark Data Sources API *(coming soon)* |
 | 14 | [14.1 Spark DataFrames, the Basics](session-14-apache-spark-dataframes-basics/lecture-14-01-spark-dataframes-basics.md) |
 | 15 | [15.1 Spark DataFrames in Detail](session-15-apache-spark-dataframes-in-detail/lecture-15-01-spark-dataframes-in-detail.md) |
-| 16 | [Lab 16.1 TfL Bike Points with Spark DataFrames](session-16-apache-spark-dataframes-lab/lab-16-01-tfl-bike-point-spark-dataframes.md) |
+| 16 | [Lab 16.1 TfL Bike Points with Spark DataFrames](session-16-apache-spark-dataframes-lab/lab-16-01-tfl-bike-point-spark-dataframes.md) · [Lab 16.2 Madrid's Air Quality into HDFS](session-16-apache-spark-dataframes-lab/lab-16-02-madrid-air-quality-into-hdfs.md) · [Lab 16.3 Processing Madrid's Air Quality](session-16-apache-spark-dataframes-lab/lab-16-03-madrid-air-quality-spark-analysis.md) |
 | 17 | [Lab 17.1 Flights EDA with Spark](session-17-apache-spark-exploratory-data-analysis-lab/lab-17-01-flights-eda-spark.md) |
 | 18 | [Lab 18.1 Spark SQL API](session-18-apache-spark-sql-api-lab/lab-18-01-tfl-bike-point-spark-analysis.md) |
 | 19 | [19.1 Course Outline](session-19-course-outline/lecture-19-01-course-outline.md) |

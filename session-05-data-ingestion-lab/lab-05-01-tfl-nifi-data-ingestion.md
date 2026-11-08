@@ -116,6 +116,8 @@ curl -s https://api.tfl.gov.uk/BikePoint | jq '.[:3][] | {name: .commonName,
    bikes: (.additionalProperties[] | select(.key=="NbBikes") | .value)}'
 ```
 
+> `jq` isn't installed in OSBDET. Install it once with `sudo apt install -y jq`, or use the Python version below.
+
 ### Try it in Python (OSBDET's Jupyter)
 
 ```python
@@ -216,9 +218,9 @@ Click **View details** on the RECEIVE event and look at both parts of the FlowFi
 | Attribute | Value |
 |---|---|
 | `filename` / `uuid` | `75b67c63-b1f3-…` |
-| `mime.type` | `application/json` |
+| `mime.type` | `application/json; charset=utf-8` |
 | `invokehttp.status.code` | `200` |
-| `invokehttp.status.message` | `OK` |
+| `invokehttp.status.message` | empty (HTTP/2 sends no reason phrase) |
 | `invokehttp.request.url` | `https://api.tfl.gov.uk/BikePoint` |
 
 **Content:** the JSON list of 799 bike points. Click **View** in the Content tab to see it formatted.

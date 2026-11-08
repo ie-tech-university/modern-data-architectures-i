@@ -132,10 +132,10 @@ STORE counts INTO '/datalake/std/movielens/good_ratings';
 
 ```python
 # PySpark (today)
-(spark.read.csv("/datalake/raw/movielens/ratings", header=True, inferSchema=True)
+(spark.read.csv("hdfs://localhost:9000/datalake/raw/movielens/ratings", header=True, inferSchema=True)
       .filter("rating >= 4.0")
       .groupBy("movieId").count()
-      .write.parquet("/datalake/std/movielens/good_ratings"))
+      .write.parquet("hdfs://localhost:9000/datalake/std/movielens/good_ratings"))
 ```
 
 ---
@@ -183,6 +183,7 @@ Creating, storing and running **algorithms over distributed graphs**: structures
 | Neo4j (graph DBs) | Store and query graphs interactively (serving layer) |
 
 ```python
+# illustrative: GraphFrames isn't installed in OSBDET (it's an extra Spark package)
 from graphframes import GraphFrame
 v = spark.createDataFrame([("a","Ana"),("b","Ben"),("c","Carla")], ["id","name"])
 e = spark.createDataFrame([("a","b"),("a","c"),("b","c")], ["src","dst"])
@@ -203,7 +204,7 @@ Creating models and applying ML algorithms over **large datasets**.
 ```python
 # recommend movies with ALS (MovieLens)
 from pyspark.ml.recommendation import ALS
-ratings = spark.read.csv("/datalake/raw/movielens/ratings", header=True, inferSchema=True)
+ratings = spark.read.csv("hdfs://localhost:9000/datalake/raw/movielens/ratings", header=True, inferSchema=True)
 train, test = ratings.randomSplit([0.8, 0.2], seed=42)
 als = ALS(userCol="userId", itemCol="movieId", ratingCol="rating", coldStartStrategy="drop")
 model = als.fit(train)

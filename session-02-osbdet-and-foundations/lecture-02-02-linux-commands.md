@@ -323,7 +323,8 @@ dataset = "ratings"
 n = !wc -l < ml-latest-small/movies.csv
 print(int(n[0]) - 1, "movies")         # 9742 movies
 
-!hdfs dfs -ls /datalake/raw/movielens  # big data commands too
+!/opt/hadoop3/bin/hdfs dfs -ls /datalake/raw/movielens   # big data commands too
+                                       # (full path: the notebook's PATH has no Hadoop)
 ```
 
 ### The `!cd` trap, `%cd` and `%%bash`

@@ -1059,6 +1059,7 @@ body.flow .orch.two { flex-direction: column; } body.flow .orch.two .tile.strong
   </table>
   </div>
   <p class="small muted" style="margin-top:14px">Typical port mapping from the OSBDET documentation. Follow the setup instructions on Blackboard if your VM differs.</p>
+  <div class="callout" style="margin-top:10px"><strong>Port 9000:</strong> Hadoop (HDFS) and MinIO both use it inside the VM, so only one of them can be on at a time. If MinIO's switch doesn't stay on, switch Hadoop off first.</div>
 </section>
 
 <section class="slide" data-sec="The course environment">
@@ -1221,10 +1222,10 @@ body.flow .orch.two { flex-direction: column; } body.flow .orch.two .tile.strong
   <div class="cols" style="align-items:start;gap:30px">
     <div>
       <div class="stp inline"><span class="sn">4</span><div><b>Find and load the downloaded file</b><p>Select the <code class="ic">.ova</code> file and review the appliance settings.</p></div></div>
-      <div class="win dlg" role="img" aria-label="Sketch of the Import Virtual Appliance dialog listing name OSBDET'26r1(amd64), guest OS Debian 64-bit, 4 CPUs and the Finish button.">
+      <div class="win dlg" role="img" aria-label="Sketch of the Import Virtual Appliance dialog listing name OSBDET 2026r1, guest OS Debian 64-bit, 4 CPUs and the Finish button.">
         <div class="win-bar"><i></i><i></i><i></i><span>Import Virtual Appliance</span></div>
         <div class="dlg-body">
-          <div class="kv"><span>Name</span><b>OSBDET'26r1(amd64)</b></div>
+          <div class="kv"><span>Name</span><b>OSBDET 2026r1</b></div>
           <div class="kv"><span>Guest OS type</span><b>Debian (64-bit)</b></div>
           <div class="kv"><span>Description</span><b>Open Source Big Data Educational Toolkit</b></div>
           <div class="kv"><span>Import hard drives as VDI</span><b>✓</b></div>
@@ -1235,9 +1236,9 @@ body.flow .orch.two { flex-direction: column; } body.flow .orch.two .tile.strong
     <div>
       <div class="stp inline"><span class="sn">5</span><div><b>Hit Finish</b><p>The import takes a few minutes.</p></div></div>
       <div class="stp inline"><span class="sn">6</span><div><b>Your course environment is ready</b><p>It appears in the list, powered off.</p></div></div>
-      <div class="win vmlist" role="img" aria-label="VirtualBox Manager list showing OSBDET'26r1(amd64), powered off.">
+      <div class="win vmlist" role="img" aria-label="VirtualBox Manager list showing OSBDET 2026r1, powered off.">
         <div class="win-bar"><i></i><i></i><i></i><span>VirtualBox Manager</span></div>
-        <div class="vm-item"><span class="vm-ico"></span><div><b>OSBDET'26r1(amd64)</b><span>● Powered off</span></div></div>
+        <div class="vm-item"><span class="vm-ico"></span><div><b>OSBDET 2026r1</b><span>● Powered off</span></div></div>
       </div>
     </div>
   </div>
@@ -1248,7 +1249,7 @@ body.flow .orch.two { flex-direction: column; } body.flow .orch.two .tile.strong
   <h2>Review the settings (optional)</h2>
   <div class="cols" style="grid-template-columns:1.1fr 1fr;align-items:center">
     <div class="win set" role="img" aria-label="Settings sketch: base memory slider and number of processors, with a safe zone up to half of the laptop's resources.">
-      <div class="win-bar"><i></i><i></i><i></i><span>OSBDET'26r1(amd64) – Settings</span></div>
+      <div class="win-bar"><i></i><i></i><i></i><span>OSBDET 2026r1 – Settings</span></div>
       <div class="set-body">
         <div class="set-side"><span>General</span><span class="hi">System</span><span>Display</span><span>Storage</span><span>Network</span></div>
         <div class="set-main">
@@ -1428,7 +1429,7 @@ body.flow .orch.two { flex-direction: column; } body.flow .orch.two .tile.strong
       <div class="jp good"><span class="url">localhost:28888/lab</span><div class="harrow"></div><div class="jt vm"><b>OSBDET's Jupyter</b><span>inside the VM (port 8888) · access to Spark, Kafka, HDFS…</span><em>✓ use this one</em></div></div>
     </div>
   </div>
-  <div class="callout"><strong>How to open it:</strong> turn Jupyter on in the WebUI, then go to <a href="http://localhost:28888/lab" target="_blank" rel="noopener"><code class="ic">http://localhost:28888/lab</code></a> and use the password <code class="ic">osbdet123$</code>.</div>
+  <div class="callout"><strong>How to open it:</strong> Jupyter is always on (no switch in the WebUI): go to <a href="http://localhost:28888/lab" target="_blank" rel="noopener"><code class="ic">http://localhost:28888/lab</code></a> and use the password <code class="ic">osbdet123$</code>.</div>
 </section>
 
 <section class="slide" data-sec="First steps with OSBDET">
@@ -1437,7 +1438,7 @@ body.flow .orch.two { flex-direction: column; } body.flow .orch.two .tile.strong
   <div class="check">
     <div class="ck"><span>1</span><b>Start the VM</b><p>VirtualBox: <em>Start without GUI</em> · UTM: <em>Play</em></p></div>
     <div class="ck"><span>2</span><b>Open the WebUI</b><p><code class="ic">localhost:2026</code> loads the welcome page</p></div>
-    <div class="ck"><span>3</span><b>Turn Jupyter on</b><p>Flip its switch in the WebUI</p></div>
+    <div class="ck"><span>3</span><b>Jupyter is already on</b><p>Its tile in the WebUI has no switch</p></div>
     <div class="ck"><span>4</span><b>Log in to Jupyter</b><p><code class="ic">localhost:28888/lab</code> with <code class="ic">osbdet123$</code></p></div>
     <div class="ck"><span>5</span><b>Run a cell</b><p>Create a notebook and run <code class="ic">print("Hello, OSBDET")</code></p></div>
     <div class="ck"><span>6</span><b>Shut down properly</b><p>VirtualBox: <em>Shut Down</em> · UTM: WebUI power button</p></div>

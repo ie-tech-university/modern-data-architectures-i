@@ -96,7 +96,7 @@ We import a **preconfigured NiFi flow** that collects Bike Points data from Tran
 | Array to JSON documents | `SplitJson` | One FlowFile per bike point |
 | New line at the end | `ReplaceText` | Adds `\n` to each document |
 | JSON Docs to JSON Lines | `MergeContent` | Joins them back into one file |
-| Time bucketing attributes | `UpdateAttribute` | Builds the name `bikepoints_yyyyMMdd_hhmm.json` |
+| Time bucketing attributes | `UpdateAttribute` | Builds the name `bikepoints_yyyyMMdd_HHmm.json` |
 | Save Bike Stations info in MinIO | `PutS3Object` | Writes the file to `raw-data` |
 
 ```
@@ -110,7 +110,7 @@ A real call on 7 November 2026 returned **797 bike points**, so each file has 79
 
 ### 1.1 NiFi and MinIO start-up
 
-Start **NiFi** and **MinIO** from [OSBDET's WebUI](http://localhost:2026) by switching them on. Keep **Jupyter** on and leave the rest off to save resources. NiFi takes a minute or two to be ready.
+Start **NiFi** and **MinIO** from [OSBDET's WebUI](http://localhost:2026) by switching them on. Keep **Jupyter** on and leave the rest off to save resources. **Hadoop must be off**: it uses port 9000, like MinIO. NiFi takes a minute or two to be ready.
 
 | Service | URL |
 |---|---|
@@ -175,11 +175,11 @@ If everything is configured correctly, **all processors start running without an
 
 You can easily create a DataFrame from multiple files ***by using wildcards (`*`) in the file names stored in MinIO***. More advanced patterns exist (`{a,b}`, `[0-3]`), but they are outside the scope of this course.
 
-The file name format is **`bikepoints_yyyyMMdd_hhmm.json`**, where `yyyy` is the year, `MM` the month, `dd` the day, `hh` the hour and `mm` the minute:
+The file name format is **`bikepoints_yyyyMMdd_HHmm.json`**, where `yyyy` is the year, `MM` the month, `dd` the day, `HH` the hour (00–23) and `mm` the minute:
 
 ```
 bikepoints_ 2026 11 07 _ 21 35 .json
-            yyyy MM dd   hh mm
+            yyyy MM dd   HH mm
 ```
 
 Since the data is **partitioned by year, month, day and hour** through the name, you can use **wildcards to include multiple files**:

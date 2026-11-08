@@ -2187,7 +2187,7 @@ body.flow .dx-bars .r { grid-template-columns: 1fr; }
     <div class="ar">→</div>
     <div class="dx-st act"><div class="hd"><span>▶️</span>Act</div><div class="bd"><code>show</code><code>count</code><code>write</code></div><div class="ft">eager</div></div>
   </div>
-  <div class="callout" style="margin-top:20px"><strong>Same setup as 14.1:</strong> <code class="ic">movies</code>, <code class="ic">ratings</code>, <code class="ic">tags</code> (and <code class="ic">links</code>) from <code class="ic">hdfs:///datalake/raw/movielens/</code>, <code class="ic">import pyspark.sql.functions as F</code>, session time zone UTC. All outputs are real.</div>
+  <div class="callout" style="margin-top:20px"><strong>Same setup as 14.1:</strong> <code class="ic">movies</code>, <code class="ic">ratings</code>, <code class="ic">tags</code> (and <code class="ic">links</code>) from <code class="ic">hdfs://localhost:9000/datalake/raw/movielens/</code>, <code class="ic">import pyspark.sql.functions as F</code>, session time zone UTC. All outputs are real.</div>
 </section>
 
 <section class="slide section" aria-label="Section 3.5">
@@ -2773,7 +2773,8 @@ genre_rows.select(<span class="ts">"title"</span>, <span class="ts">"genre"</spa
 fix_title_udf = F.udf(fix_title, StringType())       <span class="tc"># DataFrames</span>
 spark.udf.register(<span class="ts">"fix_title"</span>, fix_title, StringType())  <span class="tc"># SQL</span>
 
-movies.select(<span class="ts">"title"</span>, fix_title_udf(<span class="ts">"title"</span>).alias(<span class="ts">"fixed"</span>))</pre>
+movies.select(<span class="ts">"title"</span>, fix_title_udf(<span class="ts">"title"</span>).alias(<span class="ts">"fixed"</span>)) \
+      .where(<span class="ts">"title != fixed"</span>).show(<span class="tn">4</span>, truncate=<span class="tk">False</span>)</pre>
     </div>
     <div>
 <pre class="da-out sm" style="font-size:10px">+----------------------------------+---------------------------------+
@@ -2784,8 +2785,9 @@ movies.select(<span class="ts">"title"</span>, fix_title_udf(<span class="ts">"t
 |Big Green, The (1995)             |The Big Green (1995)             |
 |Indian in the Cupboard, The (1995)|The Indian in the Cupboard (1995)|
 +----------------------------------+---------------------------------+</pre>
-      <p class="small" style="margin-top:10px"><strong>1,543 titles</strong> fixed. UDFs let you write custom transformations in Python (or Scala), take and return columns, and even use <strong>external libraries</strong>.</p>
+      <p class="small" style="margin-top:10px"><strong>1,554 titles</strong> change: 1,543 get their article moved, 11 only lose trailing spaces. UDFs let you write custom transformations in Python (or Scala), take and return columns, and even use <strong>external libraries</strong>.</p>
       <p class="small muted" style="margin-top:8px">Also in SQL: <code class="ic">SELECT fix_title(title) FROM movies</code>.</p>
+      <p class="small muted" style="margin-top:6px">In OSBDET, <code class="ic">show()</code> after a Python UDF may print a harmless <code class="ic">BrokenPipeError</code> (Spark 3.5 + Python 3.13): Spark stopped reading early. The result is correct.</p>
     </div>
   </div>
 </section>
@@ -2908,7 +2910,7 @@ F.udf(<span class="tk">lambda</span> x: x + 1.0, <span class="ts">"double"</span
     F.countDistinct(<span class="ts">"userId"</span>).alias(<span class="ts">"users"</span>),
     F.approx_count_distinct(<span class="ts">"movieId"</span>).alias(<span class="ts">"movies_approx"</span>),
     F.countDistinct(<span class="ts">"movieId"</span>).alias(<span class="ts">"movies_exact"</span>),
-    F.min(<span class="ts">"rating"</span>), F.max(<span class="ts">"rating"</span>),
+    F.min(<span class="ts">"rating"</span>).alias(<span class="ts">"min"</span>), F.max(<span class="ts">"rating"</span>).alias(<span class="ts">"max"</span>),
     F.round(F.avg(<span class="ts">"rating"</span>), 3).alias(<span class="ts">"avg"</span>),
     F.round(F.stddev(<span class="ts">"rating"</span>), 3).alias(<span class="ts">"stddev"</span>),
     F.round(F.variance(<span class="ts">"rating"</span>), 3).alias(<span class="ts">"var"</span>),

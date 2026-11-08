@@ -56,7 +56,7 @@ bikepoints_…_2125.json …           bikepoint_docks_df  … where key in (NbB
 This lab **doesn't ingest data**. It reads the bike point files that the **NiFi flow of lab 16.1** stored in MinIO.
 
 1. Open the MinIO console (`localhost:29001`), then Object Browser → `raw-data`.
-2. Check that there are files named `bikepoints_yyyyMMdd_hhmm.json`.
+2. Check that there are files named `bikepoints_yyyyMMdd_HHmm.json`.
 3. **Empty?** Turn NiFi on, start the *TfL Bike Points info to MinIO (S3)* Process Group and wait 10–15 minutes (one file every 5 minutes). Then stop it and switch NiFi off.
 
 | Service | On? | Why |
@@ -103,7 +103,7 @@ This cluster relies on Spark '3.5.7'
 
 ### MinIO start-up
 
-Let's **start MinIO and make it available** by turning it on from [OSBDET's WebUI](http://localhost:2026). Wait until the toggle is green.
+Let's **start MinIO and make it available** by turning it on from [OSBDET's WebUI](http://localhost:2026). Wait until the toggle is green. If it doesn't stay on, switch **Hadoop** off: both use port 9000.
 
 | Service | URL |
 |---|---|
@@ -120,7 +120,7 @@ Let's **start MinIO and make it available** by turning it on from [OSBDET's WebU
 
 You can create one DataFrame from many files ***by using wildcards (`*`) in the file names stored in MinIO***. More advanced patterns exist, but they're outside the scope of this course.
 
-The file names follow the format **`bikepoints_yyyyMMdd_hhmm.json`**: `yyyy` year, `MM` month, `dd` day, `hh` hour, `mm` minute. Because the data is **partitioned by year, month, day and hour**, a wildcard picks the slice you need:
+The file names follow the format **`bikepoints_yyyyMMdd_HHmm.json`**: `yyyy` year, `MM` month, `dd` day, `HH` hour (00–23), `mm` minute. Because the data is **partitioned by year, month, day and hour**, a wildcard picks the slice you need:
 
 | Pattern | Files |
 |---|---|
