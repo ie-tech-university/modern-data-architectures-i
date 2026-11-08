@@ -2001,7 +2001,7 @@ movieId,title,genres
 <span class="tk">from</span> pyspark.sql <span class="tk">import</span> SparkSession, functions <span class="tk">as</span> F
 spark = SparkSession.builder.getOrCreate()
 
-raw = <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens"</span>   <span class="tc"># OSBDET's HDFS: always write the host</span>
+raw = <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens"</span>   <span class="tc"># always write the host</span>
 movies  = spark.read.csv(<span class="ts">f"</span>{raw}<span class="ts">/movies"</span>,  header=<span class="tk">True</span>)
 ratings = spark.read.csv(<span class="ts">f"</span>{raw}<span class="ts">/ratings"</span>, header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
 

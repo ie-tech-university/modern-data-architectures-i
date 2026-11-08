@@ -2077,7 +2077,7 @@ avg_price = <span class="tk">lambda</span> df: df.groupBy(<span class="ts">"s"</
     <div>
       <h3>Pig Latin <span class="hl2">· Yahoo! · legacy</span></h3>
 <pre class="code k13">ratings = LOAD '/datalake/raw/movielens/ratings'
-          USING PigStorage(',') AS (user, movie, rating:float);
+    USING PigStorage(',') AS (user, movie, rating:float);
 good    = FILTER ratings BY rating &gt;= 4.0;
 by_mv   = GROUP good BY movie;
 counts  = FOREACH by_mv GENERATE group, COUNT(good);
@@ -2086,11 +2086,12 @@ STORE counts INTO '/datalake/std/movielens/good_ratings';</pre>
     </div>
     <div>
       <h3>PySpark <span class="hl2">· today</span></h3>
-<pre class="code k13">(spark.read.csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>,
+<pre class="code k13">dl = <span class="ts">"hdfs://localhost:9000/datalake"</span>
+(spark.read.csv(<span class="ts">f"</span>{dl}<span class="ts">/raw/movielens/ratings"</span>,
                 header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
       .filter(<span class="ts">"rating &gt;= 4.0"</span>)
       .groupBy(<span class="ts">"movieId"</span>).count()
-      .write.parquet(<span class="ts">"hdfs://localhost:9000/datalake/std/movielens/good_ratings"</span>))</pre>
+      .write.parquet(<span class="ts">f"</span>{dl}<span class="ts">/std/movielens/good_ratings"</span>))</pre>
       <p class="small muted" style="margin-top:8px">Same idea, faster engine, any language, Parquet output.</p>
     </div>
   </div>

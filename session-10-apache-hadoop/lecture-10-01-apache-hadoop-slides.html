@@ -2164,7 +2164,7 @@ hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
 
 <span class="tc"># 3. read the result</span>
 hdfs dfs -cat /user/osbdet/wordcount/output/part-*</pre>
-  <div class="callout">Watch the job in the <strong>YARN UI</strong> (<code class="ic">localhost:28088</code>). The output folder must <strong>not</strong> exist before the run, or Hadoop refuses to start.</div>
+  <div class="callout">Check the job in YARN with <code class="ic">yarn application -list -appStates ALL</code> (<strong>FINISHED / SUCCEEDED</strong>). The output folder must <strong>not</strong> exist before the run, or Hadoop refuses to start.</div>
 </section>
 
 <section class="slide" data-sec="MapReduce">

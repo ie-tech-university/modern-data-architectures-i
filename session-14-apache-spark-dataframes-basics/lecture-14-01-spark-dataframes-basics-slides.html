@@ -2061,7 +2061,7 @@ body.flow .da-legend { flex-wrap: wrap; }
 .dx-card pre { font-size: 13px; line-height: 19px; padding: 10px 14px; }
 .dx-card.main { border-color: var(--heading); } .dx-card.main .hd { background: var(--brand); color: var(--on-brand); }
 
-.dx-verd { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.dx-verd { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .dx-v { border-radius: 10px; border: 2px solid var(--rule); padding: 14px 16px; background: var(--tile-bg); display: flex; flex-direction: column; gap: 10px; }
 .dx-v .tag { align-self: flex-start; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
 .dx-v.bad { border-color: var(--da-red); } .dx-v.bad .tag { background: var(--da-red-bg); color: var(--da-red); }
@@ -2676,11 +2676,12 @@ r.asDict()
 <pre class="code k13"><span class="tk">from</span> pyspark.sql.functions <span class="tk">import</span> *</pre>
       <p>Imports ~430 names and <strong>overwrites Python built-ins</strong> like <code class="ic">sum</code>, <code class="ic">max</code>, <code class="ic">min</code>, <code class="ic">round</code>, <code class="ic">abs</code>, <code class="ic">filter</code>…</p></div>
     <div class="dx-v meh"><span class="tag">⚠ ok, but tedious</span><b>2 · One by one</b>
-<pre class="code k13"><span class="tk">from</span> pyspark.sql.functions <span class="tk">import</span> col, avg, desc</pre>
+<pre class="code k13"><span class="tk">from</span> pyspark.sql.functions <span class="tk">import</span> (
+    col, avg, desc)</pre>
       <p>Fewer collisions, but you edit the import every time you need a new function (and <code class="ic">max</code> still collides).</p></div>
     <div class="dx-v good"><span class="tag">✓ best practice</span><b>3 · Alias the module</b>
 <pre class="code k13"><span class="tk">import</span> pyspark.sql.functions <span class="tk">as</span> F
-F.col(<span class="ts">"rating"</span>), F.avg(<span class="ts">"rating"</span>), F.max(…)</pre>
+F.col(<span class="ts">"rating"</span>), F.avg(<span class="ts">"rating"</span>)</pre>
       <p>One short alias, no collisions, and readers know where each function comes from.</p></div>
   </div>
   <div class="cols" style="grid-template-columns:1fr 1fr;gap:18px;margin-top:16px">

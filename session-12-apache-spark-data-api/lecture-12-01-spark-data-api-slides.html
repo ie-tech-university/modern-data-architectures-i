@@ -2265,8 +2265,9 @@ good = ratings_df.filter(F.col(<span class="ts">"rating"</span>) >= 4)</pre>
   <h2>Partitions in practice</h2>
   <div class="cols" style="grid-template-columns:1.2fr 1fr;align-items:start">
     <div>
-<pre class="code k13">ratings = spark.read.csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>,
-                         header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
+<pre class="code k13">ratings = spark.read.csv(
+    <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>,
+    header=<span class="tk">True</span>, inferSchema=<span class="tk">True</span>)
 
 ratings.rdd.getNumPartitions()     <span class="tc"># 1 (one 2.4 MB file)</span>
 
@@ -2635,7 +2636,8 @@ joined.unpersist()    <span class="tc"># free the memory when you're done</span>
   <div class="cols" style="grid-template-columns:1.05fr 1fr;gap:28px;align-items:start">
     <div>
 <pre class="code k13">sc = spark.sparkContext                <span class="tc"># entry point</span>
-lines = sc.textFile(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/movies"</span>)
+lines = sc.textFile(
+    <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/movies"</span>)
 
 lines.take(3)
 <span class="tc"># ['movieId,title,genres',</span>
@@ -2937,7 +2939,8 @@ sdf = spark.createDataFrame(pdf)
 
 <span class="tc"># pandas syntax, Spark engine (since Spark 3.2)</span>
 <span class="tk">import</span> pyspark.pandas <span class="tk">as</span> ps
-psdf = ps.read_csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>)
+psdf = ps.read_csv(
+    <span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/ratings"</span>)
 psdf[<span class="ts">"rating"</span>].mean()                    <span class="tc"># 3.50155…</span></pre>
       <p class="small muted" style="margin-top:6px">⚠ In OSBDET (Spark 3.5.7 + NumPy 2), <code class="ic">import pyspark.pandas</code> fails (<code class="ic">np.NaN</code> was removed in NumPy 2). It works on Spark 4.</p>
     </div>
@@ -2959,9 +2962,9 @@ psdf[<span class="ts">"rating"</span>].mean()                    <span class="tc
     <div>
 <pre class="code k13"><span class="tc"># the most common way: read external data</span>
 movies = (spark.read
-          .option(<span class="ts">"header"</span>, <span class="ts">"true"</span>)
-          .option(<span class="ts">"inferSchema"</span>, <span class="ts">"true"</span>)
-          .csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/movies"</span>))
+    .option(<span class="ts">"header"</span>, <span class="ts">"true"</span>)
+    .option(<span class="ts">"inferSchema"</span>, <span class="ts">"true"</span>)
+    .csv(<span class="ts">"hdfs://localhost:9000/datalake/raw/movielens/movies"</span>))
 movies.show(3, truncate=<span class="tk">False</span>)
 
 <span class="tc"># other formats, same API</span>
@@ -3070,7 +3073,8 @@ row.title          <span class="tc"># 'Toy Story (1995)'</span>
 row[<span class="ts">"genres"</span>]      <span class="tc"># access by name or position</span>
 
 (top.write.mode(<span class="ts">"overwrite"</span>)
-    .parquet(<span class="ts">"hdfs://localhost:9000/datalake/curated/top_movies"</span>))
+    .parquet(
+        <span class="ts">"hdfs://localhost:9000/datalake/curated/top_movies"</span>))
 <span class="tc"># _SUCCESS  part-00000-….snappy.parquet</span></pre>
       <p class="small muted" style="margin-top:10px">Unlike RDD records, DataFrame results come back as <code class="ic">Row</code> objects with named fields.</p>
     </div>

@@ -2793,7 +2793,6 @@ enrichedAqDF.limit(10).toPandas()</pre>
     </figure>
     <div>
 <pre class="code k12"><span class="tk">from</span> pyspark.sql <span class="tk">import</span> functions <span class="tk">as</span> F
-
 enrichedAqDF = aqDF.join(
       F.broadcast(magnitudesDF.withColumnRenamed(<span class="ts">"magnitudeId"</span>, <span class="ts">"MAGNITUDE"</span>)),
       <span class="ts">"MAGNITUDE"</span>)\
@@ -2805,7 +2804,7 @@ enrichedAqDF = aqDF.join(
         <tr><td>Duration</td><td>2 s</td><td><strong>1 s</strong></td></tr>
       </tbody></table></div>
       <div class="lb-q" style="margin-top:12px"><strong>Try it:</strong> run the join with and without <code class="ic">F.broadcast</code> and compare query 3 in the SQL tab at <code class="ic">localhost:24040</code>. What does <code class="ic">BroadcastExchange</code> carry in each case?</div>
-      <div class="callout" style="margin-top:10px">Rule of thumb: <strong>big fact table ⋈ small reference table → broadcast the small one</strong>. You'll need it in your group assignment.</div>
+      <div class="callout" style="margin-top:10px">Rule of thumb: <strong>big fact table ⋈ small reference table → broadcast the small one</strong>.</div>
     </div>
   </div>
 </section>
@@ -3208,14 +3207,15 @@ F.date_format(d, <span class="ts">"E"</span>)  <span class="tc"># Mon…Sun</spa
   <h2>Save it: from raw CSV to curated Parquet</h2>
   <div class="cols" style="grid-template-columns:1.1fr 0.9fr;gap:22px;align-items:start">
     <div>
-<pre class="code k12">(validDF.drop(<span class="ts">"VALID"</span>)
+<pre class="code k12">out = <span class="ts">"hdfs://localhost:9000/datalake/curated/madrid/airquality_hourly"</span>
+(validDF.drop(<span class="ts">"VALID"</span>)
    .write.mode(<span class="ts">"overwrite"</span>)
    .partitionBy(<span class="ts">"YEAR"</span>)
-   .parquet(<span class="ts">"hdfs://localhost:9000/datalake/curated/madrid/airquality_hourly"</span>))
+   .parquet(out))
 
 <span class="tc"># later, in any notebook:</span>
 aq19 = (spark.read
-   .parquet(<span class="ts">"hdfs://localhost:9000/datalake/curated/madrid/airquality_hourly"</span>)
+   .parquet(out)
    .where(<span class="ts">"YEAR = 2019"</span>))      <span class="tc"># reads only YEAR=2019/</span></pre>
 <pre class="da-out sm" style="margin-top:6px">== Physical Plan ==
 FileScan parquet [...] PartitionFilters: [(YEAR = 2019)]</pre>

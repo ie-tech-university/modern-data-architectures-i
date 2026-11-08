@@ -196,7 +196,7 @@ Most tools have a web UI that you open from your browser. The OSBDET documentati
 | OSBDET WebUI | 2026 | 2026 | `http://localhost:2026` |
 | Jupyter | 8888 | 28888 | `http://localhost:28888/lab` |
 | HDFS UI | 50070 | 50070 | `http://localhost:50070` |
-| YARN UI | 8088 | 28088 | `http://localhost:28088` |
+| YARN UI | 8088 | 28088 | `http://localhost:28088` (see note) |
 | NiFi UI | 9090 | 29090 | `http://localhost:29090` |
 | Spark UI | 4040 | 24040 | `http://localhost:24040` |
 | Superset | 8880 | 28880 | `http://localhost:28880` |
@@ -204,6 +204,8 @@ Most tools have a web UI that you open from your browser. The OSBDET documentati
 | SSH | 22 | 2222 | `ssh -p 2222 osbdet@localhost` |
 
 > Your VM may be configured differently. Follow the setup instructions on Blackboard if they differ.
+
+> **YARN UI in OSBDET v26r1:** VirtualBox's Rule 6 sends port 28088 to port 8087 instead of 8088, so the YARN UI doesn't open. The course doesn't need it: lab 10.1 checks jobs with `yarn application -list` in the terminal. To fix it, power the VM off and set Rule 6's **Guest Port** to **8088** in *Settings → Network → Advanced → Port Forwarding*.
 
 > ⚠ **Port 9000:** Hadoop (HDFS) and MinIO both use it inside the VM, so only one of them can be on at a time. If MinIO's switch doesn't stay on, switch Hadoop off first (and the other way round).
 

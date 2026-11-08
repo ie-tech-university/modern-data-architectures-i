@@ -201,7 +201,7 @@ hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
 hdfs dfs -cat /user/osbdet/wordcount/output/part-*
 ```
 
-Watch it in the YARN UI (`localhost:28088`). The output folder must not exist before the run.
+Check it in YARN with `yarn application -list -appStates ALL`: the job should be **FINISHED / SUCCEEDED**. The output folder must not exist before the run.
 
 ### Why MapReduce was overtaken
 

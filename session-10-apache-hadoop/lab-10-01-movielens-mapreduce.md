@@ -183,9 +183,19 @@ hadoop jar /opt/hadoop3/share/hadoop/tools/lib/hadoop-streaming-*.jar \
 
 Re-running? `hdfs dfs -rm -r /jobs/movies-genre` first.
 
-### Step 3 — Watch the job in YARN
+### Step 3 — Check the job in YARN
 
-Open `localhost:28088`: your `streamjob…` application should end as **FINISHED / SUCCEEDED**. Click it to see its map and reduce tasks and logs.
+While it runs, `hadoop jar` prints the progress (`map 100% reduce 100%`) and ends with `Job … completed successfully`. Its counters say how many tasks YARN launched (`Launched map tasks=2`, `Launched reduce tasks=1`). To ask YARN for every application it has run, in the same terminal:
+
+```bash
+$ yarn application -list -appStates ALL
+Application-Id                   Application-Name   Application-Type  User    …  State     Final-State  Progress
+application_1794148559677_0001   streamjob….jar     MAPREDUCE         osbdet  …  FINISHED  SUCCEEDED    100%
+```
+
+Your `streamjob…` application should be **FINISHED / SUCCEEDED**. A job whose Python script crashes shows **FAILED** instead (see *Troubleshooting*).
+
+> **YARN web UI (optional).** In OSBDET v26r1, VirtualBox's port rule for YARN (**Rule 6**) points to port 8087 instead of 8088, so `localhost:28088` doesn't open. You don't need it for this lab. If you want it: with the VM powered off, open *Settings → Network → Advanced → Port Forwarding* and set Rule 6's **Guest Port** to **8088**.
 
 ### Step 4 — Read the results
 
@@ -273,7 +283,7 @@ hadoop jar /opt/hadoop3/share/hadoop/tools/lib/hadoop-streaming-*.jar \
   -output  /jobs/movie-rating
 ```
 
-ratings.csv (2.4 MB) is 5× bigger than movies.csv but far below one 128 MB block, so you'll only see one or two map tasks in YARN.
+ratings.csv (2.4 MB) is 5× bigger than movies.csv but far below one 128 MB block, so YARN launches only one or two map tasks (see `Launched map tasks` in the counters).
 
 ### Step 4 — Read the results
 
@@ -314,7 +324,7 @@ $ hdfs dfs -cat /jobs/movie-rating/part-00000 | wc -l
 | Symptom | Likely cause | Fix |
 |---|---|---|
 | `Output directory … already exists` | You ran the job before | `hdfs dfs -rm -r /jobs/movies-genre` |
-| `PipeMapRed.waitOutputThreads(): subprocess failed` | A Python error in your script | Run the local pipe test; check task logs in YARN |
+| `PipeMapRed.waitOutputThreads(): subprocess failed` | A Python error in your script | Run the local pipe test, or read the Python error in the task logs: `grep -h -A4 Traceback /opt/hadoop3/logs/userlogs/application_*/*/stderr \| tail -5` |
 | A genre called `genres` appears | Header not skipped | Keep the `startswith("movieId")` check |
 | Strange genres like `The (1995)"` | Splitting titles with commas | Use `rsplit(",", 1)` |
 | Connection refused to port 9000 / 8032 | HDFS or YARN not running | Start Hadoop and wait a minute |
